@@ -1,0 +1,49 @@
+---
+import IconWhatsapp from '@icons/IconWhatsapp.svg'
+import { whatsappUrl } from '@config/site.mjs'
+---
+
+<a
+  href={whatsappUrl}
+  target='_blank'
+  rel='noopener noreferrer'
+  data-wa-flotante
+  aria-label='Escríbeme por WhatsApp'
+  class='invisible fixed right-5 bottom-5 z-50 flex size-14 translate-y-4 items-center justify-center rounded-full bg-whatsapp text-white opacity-0 shadow-[0_10px_28px_-6px_rgb(37_211_102/0.55)] ring-4 ring-paper transition-[opacity,transform,visibility,background-color] duration-300 ease-out hover:bg-whatsapp-hover active:scale-95 data-[visible]:visible data-[visible]:translate-y-0 data-[visible]:opacity-100 sm:right-8 sm:bottom-8'
+>
+  <IconWhatsapp class='size-8' />
+</a>
+
+<script>
+  const boton = document.querySelector<HTMLAnchorElement>('[data-wa-flotante]')
+  const hero = document.querySelector('[data-hero]')
+  const contacto = document.querySelector('#contacto')
+
+  if (boton && hero) {
+    let pasoElHero = false
+    let contactoVisible = false
+
+    const pintar = () => {
+      if (pasoElHero && !contactoVisible) boton.setAttribute('data-visible', '')
+      else boton.removeAttribute('data-visible')
+    }
+
+    new IntersectionObserver(
+      ([entrada]) => {
+        pasoElHero = !entrada.isIntersecting && entrada.boundingClientRect.top < 0
+        pintar()
+      },
+      { threshold: 0 },
+    ).observe(hero)
+
+    if (contacto) {
+      new IntersectionObserver(
+        ([entrada]) => {
+          contactoVisible = entrada.isIntersecting
+          pintar()
+        },
+        { threshold: 0.2 },
+      ).observe(contacto)
+    }
+  }
+</script>
