@@ -9,8 +9,8 @@ export const FAQS: Faq[] = [
     a: 'Depende de las páginas, el contenido y las funciones que necesites. Cuéntame qué hace tu negocio y preparo una cotización con alcance, tiempos y costos claros antes de empezar.',
   },
   {
-    q: '¿Trabajas con negocios fuera de Chiapas?',
-    a: 'Estoy en Tuxtla Gutiérrez, Chiapas, y puedo trabajar contigo a distancia si tu negocio está en otra ciudad de México. Podemos coordinar todo por videollamada, correo y WhatsApp.',
+    q: '¿Haces diseño de páginas web para negocios de otros estados?',
+    a: 'Sí. Trabajo con negocios de todo México a distancia. Estoy en Tuxtla Gutiérrez, Chiapas, y coordinamos todo por videollamada, correo y WhatsApp, estés donde estés.',
   },
   {
     q: '¿Mi página va a aparecer en Google?',
