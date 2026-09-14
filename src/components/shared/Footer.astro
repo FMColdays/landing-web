@@ -1,9 +1,109 @@
 ---
+import IconArrow from '@icons/IconArrow.svg'
+import IconDiagonal from '@icons/IconDiagonal.svg'
+import IconMail from '@icons/IconMail.svg'
+import IconPin from '@icons/IconPin.svg'
+import IconWhatsapp from '@icons/IconWhatsapp.svg'
+import { NAVEGACION } from '@data/navegacion.data'
+import { site, whatsappUrl } from '@config/site.mjs'
+
+const anio = new Date().getFullYear()
 ---
 
-<footer class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 flex flex-wrap items-center justify-between gap-4 py-8 text-sm text-muted'>
-  <p>© {new Date().getFullYear()} Erick / Web · Tuxtla Gutiérrez, Chiapas</p>
-  <a class='underline underline-offset-4 hover:text-ink' href='/privacidad/'>
-    Privacidad y contacto
-  </a>
+<footer class='relative overflow-hidden border-t border-stroke bg-paper'>
+  <div
+    class='pointer-events-none absolute -bottom-64 left-1/2 size-[44rem] -translate-x-1/2 rounded-full bg-primary/6 blur-3xl'
+    aria-hidden='true'
+  ></div>
+
+  <div class='relative mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16'>
+    <div class='grid gap-12 py-14 md:grid-cols-[1.25fr_0.85fr_1fr] md:gap-10 lg:gap-16 lg:py-20'>
+      <div data-anim='bloque'>
+        <a href='/' class='font-display text-2xl font-extrabold tracking-[-0.07em]' aria-label={`${site.name}, inicio`}>
+          erick<span class='mx-1 text-primary'>/</span>web<span class='text-primary'>.</span>
+        </a>
+        <p class='mt-5 max-w-xs text-sm leading-relaxed text-muted'>
+          Páginas web y landing pages hechas desde cero para negocios de todo México.
+        </p>
+        <p class='mt-6 inline-flex items-center gap-2 rounded-full border border-stroke px-3 py-2 text-xs font-medium text-muted'>
+          <IconPin class='size-3.5 shrink-0 text-primary-ink' />
+          {site.city}, {site.region}
+        </p>
+      </div>
+
+      <nav aria-labelledby='pie-navegacion'>
+        <h2 id='pie-navegacion' class='text-xs font-semibold tracking-[0.16em] text-dim uppercase'>
+          Navegación
+        </h2>
+        <ul class='mt-5 space-y-1' data-anim='lista'>
+          {NAVEGACION.map(({ etiqueta, href }) => (
+            <li>
+              <a
+                href={href}
+                class='group inline-flex min-h-9 items-center gap-2 text-sm font-medium transition-colors duration-200 hover:text-primary-ink active:text-primary-ink'
+              >
+                <span
+                  class='h-px w-0 bg-primary transition-[width] duration-300 ease-out group-hover:w-4 group-focus-visible:w-4'
+                  aria-hidden='true'
+                ></span>
+                {etiqueta}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div aria-labelledby='pie-contacto'>
+        <h2 id='pie-contacto' class='text-xs font-semibold tracking-[0.16em] text-dim uppercase'>
+          Contacto
+        </h2>
+        <ul class='mt-5 space-y-3' data-anim='lista'>
+          <li>
+            <a
+              href={whatsappUrl}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='group flex min-h-11 items-center gap-3 text-sm font-medium transition-colors duration-200 hover:text-primary-ink active:text-primary-ink'
+            >
+              <span class='flex size-9 shrink-0 items-center justify-center rounded-full border border-stroke bg-layer transition-colors duration-200 group-hover:border-primary group-hover:bg-primary-pale'>
+                <IconWhatsapp class='size-4' />
+              </span>
+              {site.phone}
+              <IconDiagonal class='size-3.5 shrink-0 text-dim transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${site.email}`}
+              class='group flex min-h-11 items-center gap-3 text-sm font-medium transition-colors duration-200 hover:text-primary-ink active:text-primary-ink'
+            >
+              <span class='flex size-9 shrink-0 items-center justify-center rounded-full border border-stroke bg-layer transition-colors duration-200 group-hover:border-primary group-hover:bg-primary-pale'>
+                <IconMail class='size-4' />
+              </span>
+              {site.email}
+            </a>
+          </li>
+        </ul>
+        <a
+          href='#contacto'
+          class='group mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline decoration-stroke underline-offset-6 transition-colors duration-200 hover:decoration-primary active:text-primary-ink'
+        >
+          Cuéntame tu idea
+          <IconArrow class='size-4 transition-transform duration-200 group-hover:translate-x-1' />
+        </a>
+      </div>
+    </div>
+
+    <div class='flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-stroke py-7 text-sm text-muted'>
+      <p>
+        © {anio} {site.fullName} · {site.name}
+      </p>
+      <a
+        href='/privacidad/'
+        class='min-h-9 underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-primary active:text-ink'
+      >
+        Privacidad y contacto
+      </a>
+    </div>
+  </div>
 </footer>

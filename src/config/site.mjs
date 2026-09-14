@@ -1,6 +1,7 @@
 export const site = {
   name: 'Erick / Web',
   person: 'Erick',
+  fullName: 'Erick González Pérez',
   url: 'https://web.fmcoldays.dev',
   email: 'erickgp51@gmail.com',
   phone: '+52 961 116 9037',
