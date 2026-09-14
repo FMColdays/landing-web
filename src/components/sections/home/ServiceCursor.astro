@@ -1,0 +1,30 @@
+---
+import IconPointer from '@icons/IconPointer.svg'
+---
+
+<div class='service-cursor-layer pointer-events-none absolute inset-0 z-10 hidden' aria-hidden='true'>
+  <svg class='absolute -right-12 -bottom-14 h-44 w-64 overflow-visible text-primary' viewBox='0 0 256 176' fill='none'>
+    <path
+      d='M226 148C229 87 105 151 105 96C105 58 167 86 177 31'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-dasharray='3 9'
+      opacity='0'
+      data-service-trail
+    />
+  </svg>
+  <div class='absolute top-0 left-0 w-28 origin-[8px_8px] opacity-0 will-change-transform' data-service-cursor>
+    <svg class='absolute -top-10 -left-10 size-24 overflow-visible text-primary' viewBox='0 0 96 96' fill='none'>
+      <g class='origin-center opacity-0' data-service-click>
+        <circle cx='48' cy='48' r='23' stroke='currentColor' stroke-width='2.5' />
+        <circle cx='48' cy='48' r='35' stroke='currentColor' stroke-width='1.5' opacity='.45' />
+        <path d='M48 2v8M48 86v8M2 48h8M86 48h8' stroke='currentColor' stroke-width='2' stroke-linecap='round' />
+      </g>
+    </svg>
+    <IconPointer class='relative h-28 w-24 overflow-visible drop-shadow-[0_9px_10px_rgb(36_37_33/0.18)]' />
+    <span class='absolute top-22 left-13 whitespace-nowrap rounded-full bg-primary-ink px-3 py-1.5 text-xs font-medium text-white shadow-sm'>
+      Tu negocio
+    </span>
+  </div>
+</div>

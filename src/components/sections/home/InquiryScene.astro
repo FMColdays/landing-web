@@ -1,0 +1,244 @@
+---
+import IconCheckCircle from '@icons/IconCheckCircle.svg'
+import IconFrame from '@icons/IconFrame.svg'
+---
+
+<div class='inquiry-scene' data-inquiry-scene aria-hidden='true'>
+  <p class='scene-eyebrow'>Tu idea empieza a tomar forma</p>
+  <div class='scene-stage'>
+    <div class='scene-browser' data-scene-browser>
+      <div class='scene-toolbar'>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class='scene-address'>Una web a tu medida</span>
+        <IconFrame width='13' height='13' />
+      </div>
+      <div class='scene-business' data-scene-business>
+        Tu negocio, aquí.
+      </div>
+      <svg class='scene-blueprint' viewBox='0 0 280 130' fill='none'>
+        <g data-scene-nav opacity='0'>
+          <rect x='176' y='4' width='22' height='3' rx='1.5' fill='#8a9b96'></rect>
+          <rect x='208' y='4' width='22' height='3' rx='1.5' fill='#8a9b96'></rect>
+          <rect x='240' y='4' width='22' height='3' rx='1.5' fill='#8a9b96'></rect>
+        </g>
+        <g data-scene-copy>
+          <rect x='16' y='24' width='105' height='8' rx='4' fill='#173b3c'></rect>
+          <rect x='16' y='39' width='76' height='8' rx='4' fill='#173b3c'></rect>
+          <rect x='16' y='61' width='106' height='3' rx='1.5' fill='#b5c1bb'></rect>
+          <rect x='16' y='69' width='87' height='3' rx='1.5' fill='#b5c1bb'></rect>
+          <rect x='16' y='84' width='64' height='16' rx='8' fill='#1bb7cb'></rect>
+          <path d='M61 92h10m-3-3 3 3-3 3' stroke='#173b3c' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'></path>
+        </g>
+        <g data-scene-art>
+          <rect x='148' y='20' width='116' height='86' rx='9' fill='#e8eec7'></rect>
+          <circle cx='206' cy='63' r='25' stroke='#173b3c' stroke-opacity='.2'></circle>
+          <path d='M185 77V49h20l22 28h-42Z' stroke='#173b3c' stroke-width='1.5' stroke-linejoin='round'></path>
+          <circle cx='215' cy='48' r='5' fill='#1bb7cb'></circle>
+        </g>
+        <g data-scene-tile>
+          <rect x='16' y='118' width='77' height='9' rx='4.5' fill='#e7ebe6'></rect>
+        </g>
+        <g data-scene-tile>
+          <rect x='101' y='118' width='77' height='9' rx='4.5' fill='#e7ebe6'></rect>
+        </g>
+        <g data-scene-tile>
+          <rect x='187' y='118' width='77' height='9' rx='4.5' fill='#e7ebe6'></rect>
+        </g>
+      </svg>
+      <div class='scene-browser-footer'>
+        <span data-scene-kind>Landing page</span>
+        <span class='scene-spark' data-scene-spark>
+          ✳
+        </span>
+      </div>
+    </div>
+    <div class='scene-inquiry' data-scene-inquiry>
+      <div class='scene-card-heading'>
+        <IconCheckCircle />
+        <span>Tu consulta, lista.</span>
+      </div>
+      <p class='scene-card-name' data-scene-card-business>
+        Tu negocio
+      </p>
+      <p class='scene-card-service' data-scene-card-service>
+        Una landing page
+      </p>
+      <div class='scene-card-divider'></div>
+      <p class='scene-card-signature' data-scene-card-name></p>
+      <p class='scene-card-note'>Revísala y elige cómo conversar.</p>
+    </div>
+  </div>
+  <div class='scene-bubble' data-scene-bubble>
+    <span class='scene-bubble-dot'></span>
+    <span data-scene-caption>Cuéntame un poco de tu idea.</span>
+  </div>
+</div>
+
+<style>
+  .inquiry-scene {
+    width: 100%;
+    max-width: 340px;
+    margin-inline: auto;
+    color: #173b3c;
+  }
+  .scene-eyebrow {
+    margin-bottom: 16px;
+    color: rgb(255 255 255 / 0.6);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .scene-stage {
+    position: relative;
+    perspective: 900px;
+  }
+  .scene-browser {
+    position: relative;
+    overflow: hidden;
+    background: #fafbf7;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: 12px;
+    box-shadow: 0 18px 32px -18px rgb(0 0 0 / 0.45);
+    transform: rotate(-3deg);
+    transform-origin: 50% 80%;
+  }
+  .scene-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px;
+    border-bottom: 1px solid #e1e5df;
+  }
+  .scene-toolbar > span:not(.scene-address) {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #adb9b1;
+  }
+  .scene-address {
+    flex: 1;
+    padding-left: 6px;
+    font-size: 9px;
+    color: #7c8e86;
+  }
+  .scene-business {
+    margin: 16px 16px 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .scene-blueprint {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+  }
+  .scene-browser-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 16px 12px;
+    font-size: 10px;
+    color: #6b8279;
+  }
+  .scene-spark {
+    color: #0b7b8b;
+    font-size: 20px;
+    line-height: 1;
+  }
+  .scene-inquiry {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    padding: 20px;
+    border: 1px solid #dbe3d5;
+    border-radius: 12px;
+    background: #fafbf7;
+    transform: translateY(18px) rotate(5deg);
+  }
+  .scene-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .scene-card-name {
+    margin-top: 17px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .scene-card-service {
+    margin-top: 5px;
+    color: #0b7b8b;
+    font-size: 12px;
+  }
+  .scene-card-divider {
+    height: 1px;
+    background: #dfe5dc;
+    margin-block: 16px 12px;
+  }
+  .scene-card-signature {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .scene-card-note {
+    margin-top: 6px;
+    font-size: 10px;
+    color: #6b8279;
+  }
+  .scene-bubble {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 22px auto 0;
+    min-height: 36px;
+    padding: 9px 12px;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 10px;
+    background: #e8eec7;
+    font-size: 11px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+  .scene-bubble::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+    transform: rotate(45deg);
+  }
+  .scene-bubble-dot {
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #0b7b8b;
+  }
+  @media (max-width: 1023px) {
+    .inquiry-scene {
+      max-width: 290px;
+    }
+    .scene-eyebrow {
+      text-align: center;
+    }
+  }
+</style>
