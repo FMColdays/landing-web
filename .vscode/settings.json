@@ -1,0 +1,8 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.removeUnused": "explicit"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}
