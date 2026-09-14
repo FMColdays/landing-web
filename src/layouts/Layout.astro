@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import { site } from '../config/site.mjs';
+interface Props { title?: string; description?: string; noindex?: boolean; }
+const {
+ title = 'Diseño de páginas web en Tuxtla Gutiérrez | Erick / Web',
+ description = 'Páginas web para negocios en Tuxtla Gutiérrez, Chiapas. Diseño a medida, sitios rápidos y contacto por WhatsApp. Cotiza tu landing o sitio web con Erick.',
+ noindex = !site.publicLaunch,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const schema = {
+ '@context': 'https://schema.org', '@type': 'ProfessionalService',
+ '@id': `${site.url}/#negocio`, name: site.name, url: site.url,
+ description, telephone: site.phone, email: site.email,
+ areaServed: [{ '@type': 'City', name: 'Tuxtla Gutiérrez' }, { '@type': 'State', name: 'Chiapas' }],
+ address: { '@type': 'PostalAddress', addressLocality: site.city, addressRegion: site.region, addressCountry: 'MX' },
+ hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Servicios de diseño web', itemListElement: [
+  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño de landing pages' } },
+  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño de sitios web para negocios' } },
+ ] },
+};
+---
+<!doctype html>
+<html lang="es-MX">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#faf9f6" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+ </head>
+ <body>
+  <a href="#contenido" class="fixed top-3 left-3 z-[100] -translate-y-24 rounded-lg bg-ink px-5 py-3 text-white focus:translate-y-0">Saltar al contenido</a>
+  <slot />
+ </body>
+</html>

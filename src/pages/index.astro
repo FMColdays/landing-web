@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { whatsappUrl } from '../config/site.mjs';
+import { Image } from 'astro:assets';
+import architecture from '../assets/architecture.png';
+import Contact from '../components/Contact.astro';
+const faqs = [
+ { q: '¿Cuánto cuesta una página web?', a: 'Depende de las páginas, el contenido y las funciones que necesites. Cuéntame qué hace tu negocio y preparo una cotización con alcance, tiempos y costos claros antes de empezar.' },
+ { q: '¿Trabajas solo con negocios de Tuxtla Gutiérrez?', a: 'Estoy en Tuxtla Gutiérrez, Chiapas, y puedo trabajar contigo a distancia si tu negocio está en otra ciudad de México. Podemos coordinar todo por videollamada, correo y WhatsApp.' },
+ { q: '¿Mi página va a aparecer en Google?', a: 'La preparo para que Google pueda descubrirla y entenderla: estructura, contenido, velocidad y sitemap. Aparecer y ganar posiciones lleva tiempo y depende de la competencia. Nadie puede garantizar el primer lugar ni resultados inmediatos.' },
+ { q: '¿Qué necesitas de mí para empezar?', a: 'Conocer tu negocio, tus servicios y a quién quieres llegar. Si ya tienes logo, fotos o textos, los aprovechamos. Si no, te ayudo a definir qué contenido necesitas y qué incluir en el proyecto.' },
+ { q: '¿Qué pasa después de publicar mi sitio?', a: 'Te entrego tus accesos y explico cómo funciona. Si quieres acompañamiento, podemos acordar mantenimiento y mejoras. El dominio, alojamiento y servicios de terceros se especifican en la cotización.' },
+ { q: '¿La página será mía?', a: 'Sí. El dominio y las cuentas del negocio quedan a tu nombre. La entrega del sitio, el código y las licencias utilizadas se detallan desde el inicio del proyecto.' },
+];
+---
+<Layout>
+ <header class="sticky top-0 z-40 border-b border-line/70 bg-paper/95 backdrop-blur-lg">
+  <nav aria-label="Navegación principal" class="shell flex h-21 items-center justify-between gap-6">
+   <a href="/" aria-label="Erick Web, inicio" class="font-display text-2xl font-extrabold tracking-[-0.07em]">erick<span class="mx-1 text-accent">/</span>web<span class="text-accent">.</span></a>
+   <div class="hidden items-center gap-8 text-sm font-medium md:flex"><a class="hover:text-accent" href="#servicios">Qué puedo hacer por ti</a><a class="hover:text-accent" href="#proceso">Cómo trabajo</a><a class="hover:text-accent" href="#preguntas">Preguntas</a></div>
+   <a href="#contacto" class="hidden items-center gap-5 rounded-full border border-ink px-5 py-2.5 text-sm font-semibold transition hover:bg-ink hover:text-white sm:inline-flex">Hablemos de tu proyecto <Icon name="diagonal" class="size-4" /></a>
+   <details class="relative sm:hidden"><summary aria-label="Abrir menú" class="rounded-full border border-line p-3"><Icon name="menu" /></summary><div class="absolute right-0 mt-3 grid w-64 gap-5 rounded-2xl border border-line bg-paper p-6 shadow-lg"><a href="#servicios">Servicios</a><a href="#proceso">Cómo trabajo</a><a href="#preguntas">Preguntas</a><a href="#contacto" class="font-semibold text-accent">Cotizar mi sitio</a></div></details>
+  </nav>
+ </header>
+ <main id="contenido">
+  <section class="shell pt-12 pb-14 md:pt-18 md:pb-20">
+   <div class="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm"><span class="rounded-full border border-line px-3 py-1.5 font-medium">Diseño web independiente</span><span class="text-muted">Tuxtla Gutiérrez, Chiapas</span></div>
+   <div class="grid items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-8">
+    <div>
+     <h1 class="max-w-[720px] font-display text-[clamp(3.2rem,5.9vw,5.25rem)] leading-[1.055] font-semibold tracking-[-0.065em]">Una buena web.<br />El inicio de tu<br /><span class="text-accent">próximo cliente.</span></h1>
+     <p class="mt-7 max-w-[470px] text-lg leading-relaxed text-muted">Diseño páginas web en Tuxtla Gutiérrez para que tu negocio se vea profesional, explique lo que hace y haga más fácil que te contacten.</p>
+     <div class="mt-8 flex flex-wrap items-center gap-5"><a href="#contacto" class="button button-primary">Quiero mi página web <Icon name="diagonal" /></a><a href="#servicios" class="inline-flex min-h-12 items-center gap-2 text-sm font-semibold underline decoration-line underline-offset-6">Conoce lo que incluye <Icon name="arrow" class="size-4" /></a></div>
+     <p class="mt-6 flex items-center gap-2.5 text-sm text-muted"><Icon name="check" class="size-4 text-accent" /> Trato directo conmigo. De la primera idea al lanzamiento.</p>
+    </div>
+    <div class="relative rounded-[2rem] bg-[#ebeee3] px-5 pt-8 pb-8 md:px-8 md:pt-10 md:pb-10 lg:mt-4">
+     <div class="mb-5 flex items-center justify-between"><span class="eyebrow text-muted">Tu negocio, bien presentado.</span><span class="text-2xl text-accent" aria-hidden="true">✳</span></div>
+     <div class="overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_24px_55px_-25px_rgba(30,40,20,.4)]">
+      <div class="flex h-9 items-center justify-between border-b border-line px-4"><div class="flex gap-1.5" aria-hidden="true"><span class="size-1.5 rounded-full bg-[#c3c4bb]"></span><span class="size-1.5 rounded-full bg-[#c3c4bb]"></span><span class="size-1.5 rounded-full bg-[#c3c4bb]"></span></div><span class="text-xs text-muted">Una idea de lo que podemos crear</span><span class="size-3" /></div>
+      <div class="p-6 md:p-7">
+       <div class="flex items-center justify-between gap-2"><span class="text-sm font-bold tracking-[0.18em]">HÁBITA<span class="text-accent">.</span></span><span class="text-right text-xs text-muted">Arquitectura & espacios</span></div>
+       <p class="mt-8 mb-5 font-display text-[2rem] leading-[1.08] font-medium tracking-[-0.055em] md:text-[2.6rem]">Espacios que se sienten<br /><span class="italic">como tú.</span></p>
+       <Image src={architecture} alt="Concepto arquitectónico de una casa contemporánea, usado como muestra ilustrativa de diseño web" widths={[400, 640, 960]} sizes="(max-width: 1023px) 85vw, 480px" format="webp" quality={80} loading="eager" fetchpriority="high" class="aspect-[16/9] w-full rounded-sm object-cover" />
+       <div class="mt-5 flex items-center justify-between gap-4"><p class="max-w-48 text-xs leading-relaxed text-muted">Un espacio para tu historia.<br />Un proyecto hecho a tu medida.</p><a href="#contacto" aria-label="Quiero un diseño como este ejemplo" class="flex size-10 shrink-0 items-center justify-center rounded-full bg-ink text-white hover:bg-accent"><Icon name="diagonal" class="size-4" /></a></div>
+      </div>
+     </div>
+     <div class="relative mx-3 -mt-1 flex items-center justify-between gap-3 rounded-b-xl bg-ink px-5 py-4 text-white"><div class="flex items-center gap-3"><span class="flex size-9 items-center justify-center rounded-full bg-white/10"><Icon name="cursor" class="size-4" /></span><span class="text-sm">Diseñada para iniciar conversaciones.</span></div><Icon name="diagonal" class="size-4 shrink-0 text-lime" /></div>
+     <p class="mt-5 text-center text-xs text-muted">Concepto ilustrativo · Imagen generada con IA · No es un cliente</p>
+    </div>
+   </div>
+  </section>
+  <div class="border-y border-line"><div class="shell grid grid-cols-2 gap-x-5 gap-y-5 py-7 md:grid-cols-4">{['Diseño a tu medida', 'Perfecta en celular', 'Lista para Google', 'Contacto por WhatsApp'].map((text) => <p class="flex items-center gap-3 text-sm font-medium"><Icon name="check" class="size-4 shrink-0 text-accent" />{text}</p>)}</div></div>
+  <section id="servicios" class="shell py-20 md:py-26">
+   <div class="mb-12 grid gap-6 md:grid-cols-2 md:items-end"><div><p class="eyebrow mb-5 text-accent">Una web con propósito</p><h2 class="section-heading">Que te encuentren.<br />Que te elijan.<br />Que te escriban.</h2></div><p class="max-w-md text-lg leading-relaxed text-muted md:ml-auto">Tu página debe ayudar a tu negocio. Por eso cuido lo que dice, cómo se siente y el camino que sigue alguien hasta contactarte.</p></div>
+   <div class="grid gap-4 md:grid-cols-3">
+    {[
+     { n: '01', icon: 'globe', title: 'Una presencia que da confianza', text: 'Diseño y textos que explican lo que ofreces, muestran tu trabajo y le dan personalidad a tu negocio.', tag: 'Diseño + contenido' },
+     { n: '02', icon: 'cursor', title: 'Menos pasos para contactarte', text: 'WhatsApp, correo y una solicitud de cotización sencilla. Cada sección lleva a una acción clara.', tag: 'Contacto sin complicaciones' },
+     { n: '03', icon: 'chart', title: 'Una base para crecer', text: 'Páginas rápidas y una estructura preparada para buscadores. Después del lanzamiento podemos seguir mejorando.', tag: 'SEO inicial + acompañamiento' },
+    ].map((item) => <article class="rounded-2xl border border-line p-7 lg:p-8"><div class="mb-10 flex items-center justify-between"><Icon name={item.icon} class="size-7" /><span class="text-sm text-muted">/{item.n}</span></div><h3 class="mb-4 font-display text-2xl leading-tight font-semibold tracking-tight">{item.title}</h3><p class="leading-relaxed text-muted">{item.text}</p><p class="mt-8 border-t border-line pt-5 text-sm font-medium">{item.tag}</p></article>)}
+   </div>
+  </section>
+  <section class="shell pb-20 md:pb-26">
+   <div class="overflow-hidden rounded-[2rem] bg-lime p-8 md:p-12 lg:p-16">
+    <div class="grid gap-12 md:grid-cols-[1fr_1.05fr] md:gap-20">
+     <div><p class="eyebrow mb-5">El tamaño correcto para tu idea</p><h2 class="section-heading">Tu web.<br />A tu manera.</h2><p class="mt-6 max-w-sm leading-relaxed text-muted">Desde una página para presentar tu servicio hasta un sitio completo para mostrar todo lo que haces.</p><a href="#contacto" class="button button-dark mt-8">Encuentra tu punto de partida <Icon name="arrow" /></a></div>
+     <div class="space-y-8"><article class="border-b border-ink/20 pb-8"><p class="mb-3 text-sm text-muted">01 / UN OBJETIVO CLARO</p><h3 class="font-display text-3xl font-semibold tracking-tight">Landing page</h3><p class="mt-3 leading-relaxed text-muted">Una página enfocada en presentar tu oferta y recibir consultas. Ideal para un servicio, un lanzamiento o una campaña.</p></article><article><p class="mb-3 text-sm text-muted">02 / MÁS ESPACIO PARA TU NEGOCIO</p><h3 class="font-display text-3xl font-semibold tracking-tight">Sitio de servicios</h3><p class="mt-3 leading-relaxed text-muted">Páginas para tus servicios, tu historia y tus proyectos. Una presencia completa que puede crecer contigo.</p></article></div>
+    </div>
+    <div class="mt-12 flex flex-wrap gap-x-7 gap-y-3 border-t border-ink/20 pt-6 text-sm">{['Diseño adaptable', 'Textos claros', 'SEO inicial', 'Tu dominio y tus accesos'].map(t => <span class="inline-flex items-center gap-2"><Icon name="check" class="size-4" />{t}</span>)}</div>
+   </div>
+  </section>
+  <section id="proceso" class="border-y border-line py-20 md:py-26">
+   <div class="shell"><div class="grid gap-7 md:grid-cols-2"><div><p class="eyebrow mb-5 text-accent">Así trabajamos</p><h2 class="section-heading">Una idea clara.<br />Un proceso sencillo.</h2></div><p class="max-w-md self-end text-lg leading-relaxed text-muted md:ml-auto">Hablas directamente con quien hace tu sitio. Sabes qué estamos creando, qué sigue y qué vas a recibir.</p></div>
+    <ol class="mt-14 grid gap-10 md:grid-cols-3">{[
+     ['01', 'Platicamos de tu negocio', 'Definimos qué quieres lograr, qué necesita tu cliente y qué debe incluir tu página. Recibes una propuesta antes de empezar.'],
+     ['02', 'Le damos forma', 'Preparo el contenido y el diseño. Revisamos juntos y ajustamos los detalles para que tu página se sienta tuya.'],
+     ['03', 'La ponemos a trabajar', 'Probamos en celular, revisamos los contactos y publicamos. Te entrego accesos y acordamos los siguientes pasos.'],
+    ].map(([n,t,d]) => <li class="border-t border-line pt-6"><span class="text-sm text-accent">{n} —</span><h3 class="mt-5 font-display text-xl font-semibold tracking-tight">{t}</h3><p class="mt-3 leading-relaxed text-muted">{d}</p></li>)}</ol>
+   </div>
+  </section>
+  <section class="shell grid items-center gap-12 py-20 md:grid-cols-[.8fr_1.2fr] md:py-26">
+   <div class="flex min-h-72 flex-col justify-between rounded-[2rem] bg-accent p-9 text-white"><div class="flex items-center justify-between"><span class="text-sm font-medium">Detrás de tu próxima web</span><Icon name="diagonal" class="size-8" /></div><div><p class="font-display text-7xl font-semibold tracking-[-0.065em]">Hola, soy<br />Erick<span class="text-lime">.</span></p><p class="mt-5 flex items-center gap-2 text-sm"><Icon name="pin" class="size-4" /> Tuxtla Gutiérrez, Chiapas</p></div></div>
+   <div class="lg:pl-8"><p class="eyebrow mb-5 text-accent">Diseño independiente, trato personal</p><h2 class="section-heading">Tu proyecto merece<br />atención de verdad.</h2><p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">Trabajo contigo para convertir lo que hace especial a tu negocio en una página clara, cuidada y fácil de usar.</p><p class="mt-4 max-w-xl leading-relaxed text-muted">Si estás en Tuxtla o en otra parte de Chiapas, podemos empezar por una conversación. Me cuentas tu idea y encontramos una forma de llevarla a internet.</p><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="mt-7 inline-flex min-h-12 items-center gap-4 font-semibold underline decoration-line underline-offset-6">Conversemos sobre tu idea <Icon name="diagonal" class="size-5 text-accent" /></a></div>
+  </section>
+  <section id="preguntas" class="shell pb-20 md:pb-26"><div class="grid gap-10 border-t border-line pt-16 md:grid-cols-[.75fr_1.25fr]"><div><p class="eyebrow mb-5 text-accent">Antes de empezar</p><h2 class="section-heading">Buenas preguntas.<br />Respuestas claras.</h2></div><div>{faqs.map(({q,a}) => <details class="group border-b border-line py-6"><summary class="flex items-center justify-between gap-5 text-lg font-medium">{q}<Icon name="plus" class="size-5 shrink-0 text-accent transition-transform group-open:rotate-45" /></summary><p class="pt-4 pr-6 leading-relaxed text-muted">{a}</p></details>)}</div></div></section>
+  <Contact />
+ </main>
+ <footer class="shell flex flex-wrap items-center justify-between gap-4 py-8 text-sm text-muted"><p>© {new Date().getFullYear()} Erick / Web · Tuxtla Gutiérrez, Chiapas</p><a class="underline underline-offset-4 hover:text-ink" href="/privacidad/">Privacidad y contacto</a></footer>
+ <script>
+  document.querySelectorAll('header details a').forEach(link => link.addEventListener('click', () => { const menu = link.closest('details'); if (menu) menu.open = false; }));
+ </script>
+</Layout>

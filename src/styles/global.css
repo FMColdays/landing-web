@@ -1,0 +1,38 @@
+@import '@fontsource-variable/dm-sans';
+@import '@fontsource-variable/manrope';
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans Variable', sans-serif;
+  --font-display: 'Manrope Variable', sans-serif;
+  --color-paper: #faf9f6;
+  --color-ink: #242521;
+  --color-muted: #62645b;
+  --color-line: #ddded5;
+  --color-accent: #d9431a;
+  --color-lime: #e9efca;
+}
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body { @apply bg-paper text-ink antialiased; }
+  button, a, summary, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  button, summary { cursor: pointer; }
+  ::selection { background: #e9efca; color: #242521; }
+  :focus-visible { outline: 3px solid #d9431a; outline-offset: 5px; }
+  input, select, textarea { @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid #d9431a; outline-offset: 2px; }
+  summary::-webkit-details-marker { display: none; }
+  summary { list-style: none; }
+}
+@layer components {
+  .shell { @apply mx-auto w-full max-w-[1320px] px-6 md:px-10 lg:px-14; }
+  .eyebrow { @apply text-sm font-semibold uppercase tracking-[0.15em]; }
+  .button { @apply inline-flex min-h-12 items-center justify-center gap-5 rounded-full px-7 py-4 text-base font-semibold transition duration-200 hover:-translate-y-0.5; }
+  .button-primary { @apply bg-accent text-white hover:bg-[#bb3612]; }
+  .button-dark { @apply bg-ink text-white hover:bg-black; }
+  .section-heading { @apply font-display text-4xl font-semibold leading-[1.12] tracking-[-0.045em] md:text-5xl lg:text-[3.6rem]; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
