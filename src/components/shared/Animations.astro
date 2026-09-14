@@ -1,0 +1,430 @@
+<script>
+  import gsap from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { SplitText } from 'gsap/SplitText'
+  import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+  import Lenis from 'lenis'
+  import { setupCarousel } from '../../lib/carousel'
+  import { setupFaqs } from '../../lib/faqs'
+  import 'lenis/dist/lenis.css'
+
+  gsap.registerPlugin(ScrollTrigger, SplitText, MotionPathPlugin)
+  const media = gsap.matchMedia()
+  let dispose: (() => void) | undefined
+
+  const start = async () => {
+    dispose?.()
+    await document.fonts.ready
+    media.add(
+      {
+        desktop: '(min-width: 1024px) and (min-height: 700px)',
+        mobile: '(max-width: 1023px), (max-height: 699px)',
+        reduced: '(prefers-reduced-motion: reduce)',
+      },
+      context => {
+        const { desktop, reduced } = context.conditions!
+        const events = new AbortController()
+        const { signal } = events
+        const splits: SplitText[] = []
+        const stopCarousel = setupCarousel(Boolean(reduced))
+        const stopFaqs = setupFaqs(Boolean(reduced))
+        if (reduced)
+          return () => {
+            events.abort()
+            stopCarousel()
+            stopFaqs()
+          }
+
+        // One clock for scrolling and scenes; touch keeps native behavior.
+        const lenis = new Lenis({ lerp: 0.1, smoothWheel: true, syncTouch: false })
+        const tick = (time: number) => lenis.raf(time * 1000)
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add(tick)
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(link => {
+          link.addEventListener(
+            'click',
+            event => {
+              if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
+              const hash = link.hash
+              const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)))
+              if (!target) return
+              event.preventDefault()
+              link.closest('details')?.removeAttribute('open')
+              lenis.scrollTo(target, {
+                offset: -85,
+                onComplete: () => {
+                  history.pushState(null, '', hash)
+                  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1')
+                  target.focus({ preventScroll: true })
+                },
+              })
+            },
+            { signal },
+          )
+        })
+
+        document.querySelectorAll<HTMLElement>('[data-anim="titulo"]').forEach(title => {
+          splits.push(
+            SplitText.create(title, {
+              type: 'lines',
+              mask: 'lines',
+              autoSplit: true,
+              onSplit: split =>
+                gsap.from(split.lines, {
+                  yPercent: 105,
+                  duration: 0.9,
+                  ease: 'power3.out',
+                  stagger: 0.075,
+                  scrollTrigger: { trigger: title, start: 'top 93%', once: true },
+                }),
+            }),
+          )
+        })
+        gsap.utils.toArray<HTMLElement>('[data-anim="bloque"], [data-anim="lista"] > *').forEach(block => {
+          gsap.from(block, {
+            opacity: 0,
+            y: 26,
+            duration: 0.75,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: block, start: 'top 94%', once: true },
+          })
+        })
+        const hero = document.querySelector<HTMLElement>('[data-hero]')
+        if (hero) {
+          const canvas = hero.querySelector('[data-hero-canvas]')
+          if (canvas) {
+            const intro = gsap.timeline({ defaults: { duration: 0.65, ease: 'power3.out' } })
+            intro
+              .from(canvas.querySelector('[data-hero-browser]'), { x: '+=25', y: '+=30', opacity: 0 }, 0.1)
+              .from(canvas.querySelectorAll('[data-hero-piece]'), { y: '+=12', opacity: 0, stagger: 0.12, duration: 0.5 }, 0.35)
+              .from(canvas.querySelector('[data-hero-pointer]'), { x: '+=90', y: '+=70', opacity: 0, duration: 0.7 }, 0.45)
+              .to(canvas.querySelector('[data-hero-pointer]'), { scale: 0.84, duration: 0.12, transformOrigin: '0 0' }, 1.12)
+              .to(canvas.querySelector('[data-hero-pointer]'), { scale: 1, duration: 0.3 }, 1.24)
+              .fromTo(
+                canvas.querySelector('[data-hero-click]'),
+                { scale: 0.4, opacity: 0.8, transformOrigin: 'center' },
+                { scale: 1.7, opacity: 0, duration: 0.6, immediateRender: false },
+                1.2,
+              )
+              .from(canvas.querySelector('[data-hero-phone]'), { y: '+=35', opacity: 0 }, 0.9)
+              .from(canvas.querySelector('[data-hero-search]'), { y: '-=15', opacity: 0 }, 1.15)
+              .from(canvas.querySelector('[data-hero-conversation]'), { y: '+=20', opacity: 0 }, 1.4)
+              .from(canvas.querySelector('[data-hero-spark]'), { scale: 0, rotation: -60, transformOrigin: 'center' }, 1.55)
+            const connection = canvas.querySelector<SVGPathElement>('[data-hero-connection]')!
+            const length = connection.getTotalLength()
+            intro
+              .fromTo(connection, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: 1.3 }, 0.55)
+              .set(connection, { strokeDasharray: '4 7' }, 1.85)
+          }
+          if (desktop) {
+            gsap
+              .timeline({
+                scrollTrigger: {
+                  trigger: hero,
+                  start: 'top top',
+                  end: 'bottom top',
+                  scrub: 0.6,
+                },
+              })
+              .to('[data-hero-canvas]', { y: -35, rotation: 4, ease: 'none' }, 0)
+          }
+          gsap.to('[data-scroll-cue]', { y: 6, duration: 0.75, repeat: 3, yoyo: true, ease: 'sine.inOut' })
+        }
+        const track = document.querySelector<HTMLElement>('[data-marquee-track]')
+        if (track) {
+          const loop = gsap.fromTo(
+            track,
+            { x: 0 },
+            {
+              x: () => -((track.firstElementChild as HTMLElement).offsetWidth + 48),
+              duration: 32,
+              ease: 'none',
+              repeat: -1,
+            },
+          )
+          ScrollTrigger.create({
+            trigger: track.parentElement,
+            start: 'top bottom',
+            end: 'bottom top',
+            onToggle: self => (self.isActive ? loop.play() : loop.pause()),
+            onRefresh: () => loop.invalidate(),
+          })
+        }
+        const wheel = document.querySelector('[data-arco-rueda]')
+        if (wheel)
+          gsap.from(wheel, {
+            y: 80,
+            rotation: -6,
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: { trigger: '[data-arco]', start: 'top 95%', end: 'top 48%', scrub: 0.7 },
+          })
+
+        const services = document.querySelector<HTMLElement>('[data-services-stage]')
+        if (services) {
+          const cards = gsap.utils.toArray<HTMLElement>('[data-service-card]')
+          if (desktop) services.classList.add('services-pinned')
+          // Pin only when the complete composition fits, including browser text zoom.
+          if (
+            desktop &&
+            services.scrollHeight <= services.clientHeight &&
+            cards.every(card => card.scrollHeight <= services.clientHeight - 120)
+          ) {
+            const scene = gsap.timeline({
+              defaults: { ease: 'power2.inOut' },
+              scrollTrigger: {
+                id: 'services-scene',
+                trigger: services,
+                start: 'top 72px',
+                end: () => `+=${window.innerHeight * 1.8}`,
+                pin: true,
+                scrub: 0.7,
+                invalidateOnRefresh: true,
+              },
+            })
+            const deck = services.querySelector<HTMLElement>('[data-services-cards]')!
+            const cursor = services.querySelector<HTMLElement>('[data-service-cursor]')!
+            const click = services.querySelector<SVGGElement>('[data-service-click]')!
+            const trail = services.querySelector<SVGPathElement>('[data-service-trail]')!
+            const restX = () => deck.offsetWidth - 64
+            const restY = () => deck.offsetHeight - 44
+            const total = 4.8
+            scene.addLabel('cursor-arrives', 0)
+            scene.fromTo(
+              cursor,
+              { x: () => deck.offsetWidth + 24, y: () => deck.offsetHeight + 30, scale: 0.8, rotation: -14, opacity: 0 },
+              { x: restX, y: restY, scale: 1, rotation: 0, opacity: 1, duration: 0.55 },
+              'cursor-arrives',
+            )
+            cards.slice(1).forEach((card, index) => {
+              const gesture = 1 + index * 1.65
+              const change = gesture + 0.2
+              scene.addLabel(`change-${index + 1}`, gesture)
+              scene.to(cursor, { x: () => restX() - 16, y: () => restY() - 12, rotation: -10, duration: 0.3 }, gesture - 0.3)
+              scene.to(cursor, { scale: 0.82, duration: 0.12, ease: 'power2.in' }, gesture)
+              scene.fromTo(
+                click,
+                { scale: 0.35, opacity: 0.9 },
+                { scale: 1.45, opacity: 0, duration: 0.55, ease: 'power2.out', immediateRender: false },
+                gesture + 0.1,
+              )
+              scene.to(cursor, { x: () => restX() - 75, y: () => restY() - 90, scale: 1, rotation: -18, duration: 0.5 }, change)
+              scene.fromTo(
+                trail,
+                { opacity: 0, strokeDashoffset: 0 },
+                { opacity: 0.65, strokeDashoffset: -24, duration: 0.35, immediateRender: false },
+                change,
+              )
+              scene.to(trail, { opacity: 0, duration: 0.35 }, change + 0.35)
+              scene.to(cursor, { x: restX, y: restY, rotation: 0, duration: 0.45 }, change + 0.5)
+              scene.to(cards[index], { scale: 0.94, y: -18, opacity: 0, duration: 0.8 }, change)
+              scene.fromTo(
+                card,
+                { yPercent: 110, rotation: 6, opacity: 0 },
+                {
+                  yPercent: 0,
+                  rotation: 0,
+                  opacity: 1,
+                  duration: 0.8,
+                  ease: 'power2.out',
+                },
+                change,
+              )
+            })
+            scene.to(cursor, { x: () => restX() + 28, y: () => restY() + 30, opacity: 0, duration: 0.4 }, total - 0.4)
+            scene.fromTo('[data-service-meter]', { scaleX: 0 }, { scaleX: 1, duration: total, ease: 'none' }, 0)
+          } else {
+            services.classList.remove('services-pinned')
+            cards.forEach(card =>
+              gsap.from(card, {
+                y: 36,
+                opacity: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: card, start: 'top 94%', once: true },
+              }),
+            )
+          }
+        }
+        const panel = document.querySelector('[data-expand-panel]')
+        if (panel)
+          gsap.fromTo(
+            panel,
+            { scale: desktop ? 0.88 : 0.96, borderRadius: '64px' },
+            {
+              scale: 1,
+              borderRadius: '32px',
+              ease: 'none',
+              scrollTrigger: { trigger: '[data-expand-section]', start: 'top 95%', end: 'top 32%', scrub: 0.6 },
+            },
+          )
+        const blueprint = document.querySelector<HTMLElement>('[data-web-blueprint]')
+        if (blueprint) {
+          const pages = blueprint.querySelectorAll('[data-blueprint-page]')
+          const connections = blueprint.querySelectorAll<SVGPathElement>('[data-blueprint-connection]')
+          const growth = gsap.timeline({
+            defaults: { ease: 'power2.out' },
+            scrollTrigger: {
+              id: 'web-growth',
+              trigger: blueprint,
+              start: 'top 88%',
+              end: 'center 46%',
+              scrub: 0.65,
+              invalidateOnRefresh: true,
+            },
+          })
+          growth.fromTo(
+            blueprint.querySelector('[data-blueprint-home]'),
+            { scale: 0.88, rotation: 0 },
+            { scale: 1, rotation: -2, duration: 0.65 },
+            0,
+          )
+          growth.from(blueprint.querySelectorAll('[data-blueprint-content]'), { y: 18, opacity: 0, duration: 0.5, stagger: 0.12 }, 0)
+          connections.forEach(path => {
+            const length = path.getTotalLength()
+            growth.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: 0.9 }, 0.45)
+          })
+          pages.forEach((page, index) => {
+            growth.fromTo(
+              page,
+              { xPercent: index ? -35 : 35, y: 60, rotation: 0, scale: 0.8, opacity: 0 },
+              { xPercent: 0, y: 0, rotation: index ? 12 : -10, scale: 1, opacity: 1, duration: 0.85 },
+              0.55 + index * 0.12,
+            )
+          })
+          growth.from(blueprint.querySelector('[data-blueprint-spark]'), { scale: 0, rotation: -90, duration: 0.45 }, 1.1)
+          growth.fromTo(blueprint.querySelector('[data-blueprint-caption="landing"]'), { opacity: 1 }, { opacity: 0, duration: 0.2 }, 0.55)
+          growth.fromTo(
+            blueprint.querySelector('[data-blueprint-caption="site"]'),
+            { opacity: 0, y: 6 },
+            { opacity: 1, y: 0, duration: 0.35 },
+            0.8,
+          )
+        }
+        const steps = gsap.utils.toArray<HTMLElement>('[data-paso]')
+        const routeNodes = gsap.utils.toArray<SVGGElement>('[data-route-node]')
+        steps.forEach(step => {
+          gsap.from(step, {
+            opacity: 0.4,
+            x: desktop ? 24 : 0,
+            y: 16,
+            ease: 'none',
+            scrollTrigger: { trigger: step, start: 'top 92%', end: 'top 60%', scrub: 0.4 },
+          })
+        })
+        if (steps.length) {
+          const path = document.querySelector<SVGPathElement>('[data-route-path]')
+          const traveler = document.querySelector<SVGGElement>('[data-route-traveler]')
+          if (path && traveler) {
+            const journey = gsap.timeline({
+              defaults: { ease: 'none' },
+              scrollTrigger: {
+                id: 'project-journey',
+                trigger: '[data-pasos]',
+                start: 'top 65%',
+                end: 'bottom 45%',
+                scrub: 0.3,
+                invalidateOnRefresh: true,
+              },
+            })
+            const length = path.getTotalLength()
+            gsap.set(traveler, { motionPath: { path, align: path, alignOrigin: [0.5, 0.5], start: 0, end: 0 } })
+            journey.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: 1 }, 0)
+            journey.to(traveler, { motionPath: { path, align: path, alignOrigin: [0.5, 0.5], start: 0, end: 1 }, duration: 1 }, 0)
+            const updateStage = () => {
+              const progress = journey.progress()
+              const active = Math.round(progress * (steps.length - 1))
+              steps.forEach((step, index) => step.toggleAttribute('data-activo', index === active))
+              routeNodes.forEach((node, index) => {
+                node.toggleAttribute('data-reached', progress >= index / (routeNodes.length - 1))
+                node.toggleAttribute('data-route-active', index === active)
+              })
+            }
+            journey.eventCallback('onUpdate', updateStage)
+            updateStage()
+          }
+        }
+        document.querySelectorAll<HTMLElement>('[data-reading]').forEach(paragraph => {
+          splits.push(
+            SplitText.create(paragraph, {
+              type: 'words',
+              onSplit: split =>
+                gsap.fromTo(
+                  split.words,
+                  { color: '#999c92' },
+                  {
+                    color: '#242521',
+                    stagger: 0.06,
+                    ease: 'none',
+                    scrollTrigger: {
+                      trigger: paragraph,
+                      start: 'top 82%',
+                      end: 'bottom 48%',
+                      scrub: 0.5,
+                    },
+                  },
+                ),
+            }),
+          )
+        })
+        const profile = document.querySelector('[data-profile-card]')
+        if (profile) {
+          const introduction = gsap.timeline({
+            defaults: { ease: 'power2.out' },
+            scrollTrigger: { id: 'personal-introduction', trigger: profile.parentElement, start: 'top 88%', end: 'center 50%', scrub: 0.6 },
+          })
+          introduction.from(profile, { rotation: desktop ? -5 : -2, y: 35, scale: 0.96, duration: 0.65 }, 0)
+          const doodle = profile.querySelector<SVGPathElement>('[data-profile-doodle]')
+          if (doodle) {
+            const length = doodle.getTotalLength()
+            introduction.fromTo(doodle, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: 0.8 }, 0.35)
+          }
+          introduction.from('[data-profile-hello]', { y: 14, rotation: -8, scale: 0.7, opacity: 0, duration: 0.45 }, 0.55)
+          introduction.from('[data-profile-wave]', { x: -4, opacity: 0, duration: 0.25, stagger: 0.06 }, 0.8)
+          introduction.from(
+            '[data-profile-stamp]',
+            {
+              y: desktop ? -75 : -45,
+              rotation: desktop ? 20 : 8,
+              scale: desktop ? 1.4 : 1.1,
+              opacity: 0,
+              duration: 0.4,
+              ease: 'back.out(1.8)',
+            },
+            0.9,
+          )
+        }
+        const progress = document.querySelector('[data-progreso]')
+        if (progress) gsap.to(progress, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } })
+
+        // Opening FAQs and loading images changes the position of later scenes.
+        const refresh = () => ScrollTrigger.refresh()
+        document.querySelectorAll('details:not([data-faq-item])').forEach(detail => detail.addEventListener('toggle', refresh, { signal }))
+        document.querySelectorAll('img').forEach(img => {
+          if (!img.complete) img.addEventListener('load', refresh, { once: true, signal })
+        })
+        ScrollTrigger.sort()
+        ScrollTrigger.refresh()
+        return () => {
+          events.abort()
+          stopCarousel()
+          stopFaqs()
+          splits.forEach(split => split.revert())
+          gsap.ticker.remove(tick)
+          lenis.destroy()
+          steps.forEach(step => step.removeAttribute('data-activo'))
+          routeNodes.forEach(node => {
+            node.removeAttribute('data-reached')
+            node.removeAttribute('data-route-active')
+          })
+          services?.classList.remove('services-pinned')
+        }
+      },
+    )
+    dispose = () => media.revert()
+  }
+  start()
+  document.addEventListener('astro:before-swap', () => dispose?.())
+  document.addEventListener('astro:page-load', start)
+  if (import.meta.hot) import.meta.hot.dispose(() => dispose?.())
+</script>
