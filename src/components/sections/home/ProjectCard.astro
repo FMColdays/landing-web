@@ -1,0 +1,96 @@
+---
+import IconScroll from '@icons/IconScroll.svg'
+import type { Projects } from '@/interfaces'
+import { Picture } from 'astro:assets'
+
+interface Props {
+  position: number
+  projects: Projects
+}
+
+const { position, projects } = Astro.props
+---
+
+<li
+  class='absolute top-0 left-1/2 ml-[calc(var(--ancho)/-2)] w-(--ancho) origin-[50%_75%] will-change-[transform,opacity] **:[-webkit-user-drag:none] sin-carrusel:static sin-carrusel:m-0 sin-carrusel:w-auto sin-carrusel:will-change-auto'
+  data-arco-item
+>
+  <article
+    class='overflow-hidden rounded-[1.25rem] border border-stroke bg-layer shadow-[0_30px_70px_-35px_rgb(36_37_33/0.35)]'
+    aria-label={projects.nombre}
+    data-project-article
+  >
+    <div class='flex h-11 items-center justify-between gap-4 border-b border-stroke bg-layer-2 px-5 text-xs text-muted' aria-hidden='true'>
+      <span class='flex gap-[0.3rem] [&>i]:size-[0.4rem] [&>i]:rounded-full [&>i]:bg-stroke-strong [&>i:first-child]:bg-primary'>
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
+      <span>Diseño a medida</span>
+      <span class='tabular-nums'>0{position + 1}</span>
+    </div>
+
+    <div class='relative'>
+      <div
+        class='aspect-4/5 touch-pan-y overflow-y-auto overscroll-contain bg-layer-2 [scrollbar-color:var(--color-primary)_var(--color-layer-2)] scrollbar-thin sm:aspect-[4/4.8] [&_picture]:block'
+        data-project-screen
+        data-lenis-prevent
+        tabindex='0'
+        role='region'
+        aria-label={`Vista del diseño de ${projects.nombre}. Desplázate dentro de la imagen para ver más.`}
+      >
+        <Picture
+          class='block h-auto w-full'
+          src={projects.imagen}
+          alt={projects.alt}
+          formats={['webp']}
+          fallbackFormat='webp'
+          widths={[360, 540, 800, 1080]}
+          sizes='(min-width: 1024px) 336px, (min-width: 640px) 320px, 260px'
+          quality={80}
+          loading='lazy'
+          decoding='async'
+        />
+      </div>
+      <div
+        class='project-hint pointer-events-none absolute right-4 bottom-4 left-4 flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-[#e8eec7] px-3 py-2 text-xs font-medium text-[#173b3c] shadow-sm'
+        data-project-hint
+        aria-hidden='true'
+      >
+        <IconScroll />
+        Explora el diseño
+      </div>
+    </div>
+
+    <div class='px-5 pt-4 pb-5 sm:px-6 sm:pt-5 sm:pb-6'>
+      <p class='mb-2 text-xs font-semibold text-primary-ink'>{projects.categoria}</p>
+      <h3 class='text-[clamp(1.25rem,2vw,1.65rem)] leading-[1.15] font-[650] tracking-[-0.04em]'>{projects.nombre}</h3>
+      <p class='mt-2 text-sm leading-normal text-muted'>{projects.giro}</p>
+    </div>
+  </article>
+  <button
+    type='button'
+    class='project-select absolute right-5 bottom-5 z-20 rounded-full border border-stroke bg-layer px-3 py-2 text-xs font-medium outline-offset-4 focus-visible:outline-2 focus-visible:outline-primary'
+    data-project-select
+    hidden
+    aria-label={`Ver proyecto ${projects.nombre}`}
+  >
+    Ver proyecto ↗
+  </button>
+</li>
+
+<style>
+  [data-arco-item][data-project-side='left'] .project-select {
+    right: auto;
+    left: 20px;
+  }
+  .project-hint {
+    transition: opacity 0.2s;
+  }
+  [data-arco-item][data-project-explored] .project-hint {
+    opacity: 0;
+  }
+  :global([data-carousel-ready]) [data-arco-item]:not([data-project-active]) .project-hint {
+    opacity: 0;
+  }
+</style>

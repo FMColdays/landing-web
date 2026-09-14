@@ -1,0 +1,69 @@
+---
+import IconArrow from '@icons/IconArrow.svg'
+import IconCheck from '@icons/IconCheck.svg'
+import IconDiagonal from '@icons/IconDiagonal.svg'
+import HeroCanvas from '@sections/home/HeroCanvas.astro'
+---
+
+<section
+  class='relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_92%_30%,var(--color-primary-pale),transparent_52%)]'
+  data-hero
+>
+  <div class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 relative pt-12 pb-14 md:pt-18 md:pb-20' data-hero-content>
+    <div data-anim='bloque' class='mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm'>
+      <span class='rounded-full border border-stroke px-3 py-1.5 font-medium'>Diseño web independiente</span>
+      <span class='text-muted'>Desde Tuxtla Gutiérrez para todo México</span>
+    </div>
+
+    <div class='grid items-center gap-12 lg:grid-cols-[1.3fr_0.9fr] lg:gap-10'>
+      <div class='min-w-0'>
+        <h1
+          data-anim='titulo'
+          class='font-display text-[clamp(2.8rem,4.9vw,4.4rem)] leading-[1.04] font-semibold tracking-[-0.065em] text-balance'
+        >
+          Páginas web que traen tu próximo cliente.
+          <span class='text-gradient'>En todo México.</span>
+        </h1>
+        <p data-anim='bloque' class='mt-6 max-w-xl text-base leading-relaxed text-muted'>
+          Creo tu sitio desde cero, con diseño a tu medida y una base preparada para Google. Para que tu negocio se vea profesional y sea
+          más fácil contactarte.
+        </p>
+        <div data-anim='bloque' class='mt-7 flex flex-wrap items-center gap-x-5 gap-y-3'>
+          <a href='#contacto' class='button button-primary'>
+            Quiero mi página web <IconDiagonal class='size-5' />
+          </a>
+          <a
+            href='#trabajo'
+            class='inline-flex min-h-12 items-center gap-2 text-sm font-semibold underline decoration-stroke underline-offset-6'
+          >
+            Mira sitios que he hecho <IconArrow class='size-4' />
+          </a>
+        </div>
+        <p class='mt-7 flex items-center gap-2.5 text-sm text-muted'>
+          <IconCheck class='size-4 shrink-0 text-primary-ink' /> Trato directo conmigo. De la primera idea al lanzamiento.
+        </p>
+      </div>
+      <HeroCanvas />
+    </div>
+    <div
+      class='mt-12 flex items-center justify-between border-t border-stroke pt-5 text-[0.625rem] text-muted sm:text-xs'
+      aria-hidden='true'
+    >
+      <span>DISEÑO · DESARROLLO · SEO</span>
+      <span class='flex items-center gap-3'>
+        Conoce mi trabajo <span data-scroll-cue>↓</span>
+      </span>
+    </div>
+  </div>
+
+  <div class='border-y border-stroke'>
+    <div class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 grid grid-cols-2 gap-x-5 gap-y-5 py-7 md:grid-cols-4'>
+      {['Diseño a tu medida', 'Perfecta en celular', 'Lista para Google', 'Contacto por WhatsApp'].map(text => (
+        <p class='flex items-center gap-3 text-sm font-medium'>
+          <IconCheck class='size-4 shrink-0 text-primary' />
+          {text}
+        </p>
+      ))}
+    </div>
+  </div>
+</section>

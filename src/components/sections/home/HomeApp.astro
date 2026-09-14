@@ -1,0 +1,46 @@
+---
+import Alcance from '@sections/home/Alcance.astro'
+import Contacto from '@sections/home/Contacto.astro'
+import Footer from '@components/shared/Footer.astro'
+import Header from '@components/shared/Header.astro'
+import Hero from '@sections/home/Hero.astro'
+import Layout from '@layouts/Layout.astro'
+import Marquesina from '@sections/home/Marquesina.astro'
+import Preguntas from '@sections/home/Preguntas.astro'
+import Proceso from '@sections/home/Proceso.astro'
+import Services from '@sections/home/Services.astro'
+import Sobre from '@sections/home/Sobre.astro'
+import Projects from '@sections/home/Projects.astro'
+---
+
+<Layout
+  title='Diseño de Páginas Web y Landing Pages para Negocios en México'
+  description='Diseño de páginas web y landing pages para negocios de todo México. Sitios hechos desde cero, rápidos y a medida, con trato directo. Cotiza por WhatsApp.'
+  keywords={[
+    'diseño de páginas web para negocios',
+    'crear página web para mi negocio',
+    'diseño de landing pages en México',
+    'diseñador web freelance México',
+    'cuánto cuesta una página web',
+    'diseño de páginas web en Tuxtla Gutiérrez',
+    'Erick Web',
+  ]}
+  ogTitle='Páginas web para negocios en todo México'
+  ogDescription='Tu negocio con una página que se ve bien y trae clientes. Diseño a medida, hecho desde cero, con trato directo.'
+  ogImage='/images/og/og-image-home.webp'
+  schemaType='service'
+>
+  <Header />
+  <main id='contenido'>
+    <Hero />
+    <Marquesina />
+    <Projects />
+    <Services />
+    <Alcance />
+    <Proceso />
+    <Sobre />
+    <Preguntas />
+    <Contacto />
+  </main>
+  <Footer />
+</Layout>

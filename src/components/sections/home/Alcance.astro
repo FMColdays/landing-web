@@ -1,0 +1,52 @@
+---
+import IconArrow from '@icons/IconArrow.svg'
+import IconCheck from '@icons/IconCheck.svg'
+import WebBlueprint from '@sections/home/WebBlueprint.astro'
+---
+
+<section id='tu-web' class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 pb-24 lg:pb-32' data-expand-section>
+  <div class='overflow-hidden rounded-4xl bg-secondary p-8 md:p-12 lg:p-16' data-expand-panel>
+    <div class='grid items-center gap-10 md:grid-cols-[1fr_1.05fr] md:gap-12'>
+      <div>
+        <div class='mb-5 inline-flex items-center gap-3'>
+          <span class='bg-primary/50 block h-px w-6'></span>
+          <span class='text-xs font-medium tracking-[0.14em] uppercase text-primary-ink'>El tamaño correcto para tu idea</span>
+        </div>
+        <h2 data-anim='titulo' class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em]'>
+          Tu web. A tu manera.
+        </h2>
+        <p class='mt-6 max-w-sm leading-relaxed text-muted'>
+          Desde una página para presentar tu servicio hasta un sitio completo para mostrar todo lo que haces.
+        </p>
+        <a href='#contacto' class='button button-dark mt-8'>
+          Encuentra tu punto de partida <IconArrow class='size-5' />
+        </a>
+      </div>
+      <WebBlueprint />
+    </div>
+    <div class='mt-10 grid gap-7 border-t border-ink/20 pt-8 md:grid-cols-2 md:gap-12'>
+      <article>
+        <p class='mb-3 text-sm text-muted'>01 / UN OBJETIVO CLARO</p>
+        <h3 class='font-display text-3xl font-semibold tracking-tight'>Landing page</h3>
+        <p class='mt-3 leading-relaxed text-muted'>
+          Una página enfocada en presentar tu oferta y recibir consultas. Ideal para un servicio, un lanzamiento o una campaña.
+        </p>
+      </article>
+      <article>
+        <p class='mb-3 text-sm text-muted'>02 / MÁS ESPACIO PARA TU NEGOCIO</p>
+        <h3 class='font-display text-3xl font-semibold tracking-tight'>Sitio web de servicios</h3>
+        <p class='mt-3 leading-relaxed text-muted'>
+          Páginas para tus servicios, tu historia y tus proyectos. Una presencia completa que puede crecer contigo.
+        </p>
+      </article>
+    </div>
+    <div class='mt-12 flex flex-wrap gap-x-7 gap-y-3 border-t border-ink/20 pt-6 text-sm'>
+      {['Diseño adaptable', 'Textos claros', 'SEO inicial', 'Tu dominio y tus accesos'].map(t => (
+        <span class='inline-flex items-center gap-2'>
+          <IconCheck class='size-4' />
+          {t}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

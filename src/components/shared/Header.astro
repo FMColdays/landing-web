@@ -1,0 +1,58 @@
+---
+import IconDiagonal from '@icons/IconDiagonal.svg'
+import IconMenu from '@icons/IconMenu.svg'
+---
+
+<header class='sticky top-0 z-40 border-b border-stroke/70 bg-paper/95 backdrop-blur-lg'>
+  <nav
+    aria-label='Navegación principal'
+    class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 flex h-21 items-center justify-between gap-6'
+  >
+    <a href='/' aria-label='Erick Web, inicio' class='font-display text-2xl font-extrabold tracking-[-0.07em]'>
+      erick<span class='mx-1 text-primary'>/</span>web<span class='text-primary'>.</span>
+    </a>
+    <div class='hidden items-center gap-8 text-sm font-medium md:flex'>
+      <a class='hover:text-primary-ink' href='#trabajo'>
+        Trabajo
+      </a>
+      <a class='hover:text-primary-ink' href='#servicios'>
+        Qué puedo hacer por ti
+      </a>
+      <a class='hover:text-primary-ink' href='#proceso'>
+        Cómo trabajo
+      </a>
+      <a class='hover:text-primary-ink' href='#preguntas'>
+        Preguntas
+      </a>
+    </div>
+    <a
+      href='#contacto'
+      class='hidden items-center gap-5 rounded-full border border-ink px-5 py-2.5 text-sm font-semibold transition hover:bg-ink hover:text-white sm:inline-flex'
+    >
+      Hablemos de tu proyecto <IconDiagonal class='size-4' />
+    </a>
+    <details class='relative sm:hidden'>
+      <summary aria-label='Abrir menú' class='rounded-full border border-stroke p-3 list-none'>
+        <IconMenu class='size-5' />
+      </summary>
+      <div class='absolute right-0 mt-3 grid w-64 gap-5 rounded-2xl border border-stroke bg-paper p-6 shadow-lg'>
+        <a href='#trabajo'>Trabajo</a>
+        <a href='#servicios'>Servicios</a>
+        <a href='#proceso'>Cómo trabajo</a>
+        <a href='#preguntas'>Preguntas</a>
+        <a href='#contacto' class='font-semibold text-primary-ink'>
+          Cotizar mi sitio
+        </a>
+      </div>
+    </details>
+  </nav>
+</header>
+
+<script>
+  document.querySelectorAll('header details a').forEach(link =>
+    link.addEventListener('click', () => {
+      const menu = link.closest('details')
+      if (menu) menu.open = false
+    }),
+  )
+</script>

@@ -1,0 +1,57 @@
+---
+import IconPlus from '@icons/IconPlus.svg'
+import { FAQS } from '@/data/faqs.data'
+import FaqConversation from '@sections/home/FaqConversation.astro'
+import IconArrow from '@icons/IconArrow.svg'
+---
+
+<section id='preguntas' class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 pb-24 lg:pb-32'>
+  <div class='grid gap-10 border-t border-stroke pt-16 md:grid-cols-[.75fr_1.25fr]'>
+    <div class='md:sticky md:top-32 md:self-start'>
+      <div class='mb-5 inline-flex items-center gap-3'>
+        <span class='bg-primary/50 block h-px w-6'></span>
+        <span class='text-xs font-medium tracking-[0.14em] uppercase text-primary-ink'>Antes de empezar</span>
+      </div>
+      <h2 data-anim='titulo' class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em]'>
+        Buenas preguntas. Respuestas claras.
+      </h2>
+      <FaqConversation />
+      <a
+        href='#contacto'
+        class='mt-6 inline-flex min-h-11 items-center gap-3 text-sm font-semibold underline decoration-stroke underline-offset-6'
+      >
+        ¿Otra pregunta? Hablemos <IconArrow class='size-4' />
+      </a>
+    </div>
+    <div>
+      {FAQS.map(({ q, a }, index) => (
+        <details
+          class='faq-item group mb-3 rounded-2xl border border-stroke bg-layer/60 transition-colors open:border-primary/35 open:bg-primary-pale/60'
+          data-faq-item
+        >
+          <summary class='flex min-h-22 list-none items-center gap-4 px-5 py-5 text-base leading-snug font-medium sm:px-6 sm:text-lg'>
+            <span class='faq-number text-xs tabular-nums text-dim' aria-hidden='true'>
+              0{index + 1}
+            </span>
+            <span class='flex-1'>{q}</span>
+            <span class='flex size-8 shrink-0 items-center justify-center rounded-full border border-stroke bg-layer group-open:border-primary/35 group-open:bg-primary-pale'>
+              <IconPlus class='size-4 text-primary-ink transition-transform group-open:rotate-45' />
+            </span>
+          </summary>
+          <div data-faq-panel>
+            <p class='px-5 pb-6 text-sm leading-relaxed text-muted sm:pl-14 sm:pr-8 sm:text-base'>{a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item[open] .faq-number {
+    color: var(--color-primary-ink);
+  }
+</style>

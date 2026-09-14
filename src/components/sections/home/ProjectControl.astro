@@ -1,0 +1,23 @@
+---
+import IconArrow from '@icons/IconArrow.svg'
+---
+
+<div class='mt-7 flex items-center gap-5 group-not-has-data-carousel-ready:hidden'>
+  <button
+    type='button'
+    class='flex size-13 items-center justify-center rounded-full border border-stroke-strong bg-layer transition-colors duration-200 hover:border-primary hover:bg-primary-pale'
+    data-arco-prev
+    aria-label='Ver el sitio anterior'
+  >
+    <IconArrow class='size-5 rotate-180' />
+  </button>
+  <span class='text-sm text-muted' data-arco-cuenta aria-live='polite' aria-atomic='true'></span>
+  <button
+    type='button'
+    class='flex size-13 items-center justify-center rounded-full border border-stroke-strong bg-layer transition-colors duration-200 hover:border-primary hover:bg-primary-pale'
+    data-arco-next
+    aria-label='Ver el siguiente sitio'
+  >
+    <IconArrow class='size-5' />
+  </button>
+</div>

@@ -1,0 +1,67 @@
+---
+import IconChart from '@icons/IconChart.svg'
+import IconCursor from '@icons/IconCursor.svg'
+import IconGlobe from '@icons/IconGlobe.svg'
+import ServiceCursor from '@sections/home/ServiceCursor.astro'
+---
+
+<section id='servicios' class='mb-20 overflow-clip bg-layer-2' data-services>
+  <div class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 py-24 lg:py-20' data-services-stage>
+    <div class='mb-12 grid gap-6 md:grid-cols-2 md:items-end' data-services-heading>
+      <div>
+        <div class='mb-5 inline-flex items-center gap-3'>
+          <span class='bg-primary/50 block h-px w-6'></span>
+          <span class='text-xs font-medium tracking-[0.14em] uppercase text-primary-ink'>Una web con propósito</span>
+        </div>
+        <h2 data-anim='titulo' class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em]'>
+          Que te encuentren. Que te elijan. Que te escriban.
+        </h2>
+      </div>
+      <p class='max-w-md text-lg leading-relaxed text-muted md:ml-auto'>
+        Tu página debe ayudar a tu negocio. Por eso cuido lo que dice, cómo se siente y el camino que sigue alguien hasta contactarte.
+      </p>
+    </div>
+    <div class='relative grid gap-4 md:grid-cols-3' data-services-cards>
+      {[
+        {
+          n: '01',
+          icon: IconGlobe,
+          title: 'Una presencia que da confianza',
+          text: 'Diseño y textos que explican lo que ofreces, muestran tu trabajo y le dan personalidad a tu negocio.',
+          tag: 'Diseño + contenido',
+        },
+        {
+          n: '02',
+          icon: IconCursor,
+          title: 'Menos pasos para contactarte',
+          text: 'WhatsApp, correo y una solicitud de cotización sencilla. Cada sección lleva a una acción clara.',
+          tag: 'Contacto sin complicaciones',
+        },
+        {
+          n: '03',
+          icon: IconChart,
+          title: 'Una base para crecer',
+          text: 'Páginas rápidas y una estructura preparada para buscadores. Después del lanzamiento podemos seguir mejorando.',
+          tag: 'SEO inicial + acompañamiento',
+        },
+      ].map((item, i) => (
+        <article
+          class:list={['service-card rounded-2xl border border-stroke p-7 lg:p-8', ['bg-paper', 'bg-primary-pale', 'bg-secondary'][i]]}
+          data-service-card
+        >
+          <div class='mb-10 flex items-center justify-between'>
+            <item.icon class='size-7' />
+            <span class='text-sm text-muted'>/{item.n}</span>
+          </div>
+          <h3 class='mb-4 font-display text-2xl leading-tight font-semibold tracking-tight'>{item.title}</h3>
+          <p class='leading-relaxed text-muted'>{item.text}</p>
+          <p class='mt-8 border-t border-stroke pt-5 text-sm font-medium'>{item.tag}</p>
+        </article>
+      ))}
+      <ServiceCursor />
+    </div>
+    <div class='service-meter mt-9 h-0.5 overflow-hidden bg-stroke max-sm:hidden' aria-hidden='true'>
+      <span class='block h-full origin-left bg-primary-ink' data-service-meter></span>
+    </div>
+  </div>
+</section>

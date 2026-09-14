@@ -1,0 +1,53 @@
+---
+import ProcessRoute from '@sections/home/ProcessRoute.astro'
+---
+
+<section id='proceso' class='border-y border-stroke py-24 lg:py-32'>
+  <div class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20'>
+    <div class='lg:sticky lg:top-32 lg:self-start'>
+      <div class='mb-5 inline-flex items-center gap-3'>
+        <span class='bg-primary/50 block h-px w-6'></span>
+        <span class='text-xs font-medium tracking-[0.14em] uppercase text-primary-ink'>Así trabajamos</span>
+      </div>
+      <h2 data-anim='titulo' class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em]'>
+        Una idea clara. Un proceso sencillo.
+      </h2>
+      <p class='mt-6 max-w-md leading-relaxed text-muted'>
+        Hablas directamente con quien hace tu sitio. Sabes qué estamos creando, qué sigue y qué vas a recibir.
+      </p>
+      <ProcessRoute />
+    </div>
+
+    <ol class='flex flex-col' data-pasos>
+      {[
+        [
+          '01',
+          'Platicamos de tu negocio',
+          'Definimos qué quieres lograr, qué necesita tu cliente y qué debe incluir tu página. Recibes una propuesta antes de empezar.',
+        ],
+        [
+          '02',
+          'Le damos forma',
+          'Preparo el contenido y el diseño. Revisamos juntos y ajustamos los detalles para que tu página se sienta tuya.',
+        ],
+        [
+          '03',
+          'La ponemos a trabajar',
+          'Probamos en celular, revisamos los contactos y publicamos. Te entrego accesos y acordamos los siguientes pasos.',
+        ],
+      ].map(([num, titulo, texto]) => (
+        <li class='group border-t border-stroke py-9 transition-colors duration-500 last:border-b data-[activo]:border-primary' data-paso>
+          <div class='flex items-start gap-5'>
+            <span class='grid size-10 shrink-0 place-items-center rounded-full border border-stroke font-display text-sm font-semibold text-muted transition-colors duration-300 group-data-[activo]:border-primary-ink group-data-[activo]:bg-primary-pale group-data-[activo]:text-primary-ink'>
+              {num}
+            </span>
+            <div>
+              <h3 class='font-display text-2xl font-semibold tracking-[-0.03em]'>{titulo}</h3>
+              <p class='mt-3 max-w-lg leading-relaxed text-muted'>{texto}</p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

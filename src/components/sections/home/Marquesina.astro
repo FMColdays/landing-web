@@ -1,0 +1,18 @@
+---
+import { MARQUESINA } from '@/data'
+---
+
+<div class='overflow-hidden border-y border-stroke bg-layer-2 py-6' data-marquee>
+  <div class='flex w-max items-center gap-12' data-marquee-track>
+    {[0, 1, 2].map(() => (
+      <div class='flex shrink-0 items-center gap-12'>
+        {MARQUESINA.map(termino => (
+          <span class='flex shrink-0 items-center gap-12 font-display text-xl font-semibold tracking-[-0.03em] text-ink/70 lg:text-2xl'>
+            {termino}
+            <span class='size-1.5 shrink-0 rounded-full bg-primary'></span>
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
