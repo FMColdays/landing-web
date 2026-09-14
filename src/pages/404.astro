@@ -1,4 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro'
 ---
-<Layout title="Página no encontrada | Erick / Web" noindex={true}><main id="contenido" class="shell flex min-h-screen flex-col items-start justify-center py-20"><p class="eyebrow text-accent">Error 404</p><h1 class="section-heading mt-5">Esta página no está aquí.<br />Tu próxima web puede estarlo.</h1><a href="/" class="button button-primary mt-10">Volver al inicio</a></main></Layout>
+
+<Layout title='Página no encontrada' noindex={true}>
+  <main id='contenido' class='mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16 flex min-h-screen flex-col items-start justify-center py-20'>
+    <p class='text-xs font-medium tracking-[0.14em] uppercase text-primary-ink'>Error 404</p>
+    <h1 class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em] mt-5'>
+      Esta página no está aquí. Tu próxima web puede estarlo.
+    </h1>
+    <a href='/' class='button button-primary mt-10'>
+      Volver al inicio
+    </a>
+  </main>
+</Layout>
