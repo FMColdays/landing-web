@@ -1,0 +1,200 @@
+---
+import IconArrow from '@icons/IconArrow.svg'
+import IconMail from '@icons/IconMail.svg'
+import IconWhatsapp from '@icons/IconWhatsapp.svg'
+import { site, whatsappUrl } from '@config/site.mjs'
+import InquiryScene from '@sections/home/InquiryScene.astro'
+---
+
+<section
+  id='contacto'
+  class='relative overflow-hidden border-t border-stroke bg-layer-2 py-20 text-ink lg:py-28'
+  aria-labelledby='contact-title'
+>
+  <div class='pointer-events-none absolute -top-48 -right-48 size-[38rem] rounded-full bg-primary/8 blur-3xl' aria-hidden='true'></div>
+  <div class='relative mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-16'>
+    <div class='mb-10 grid gap-6 md:grid-cols-[1.5fr_0.65fr] md:items-end md:gap-12 lg:mb-14' data-anim='bloque'>
+      <div>
+        <p class='mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-primary-ink uppercase'>
+          <span class='h-px w-7 bg-primary' aria-hidden='true'></span> El siguiente paso
+        </p>
+        <h2 id='contact-title' class='max-w-3xl text-[clamp(2.4rem,5.4vw,4.5rem)] leading-[1.03] font-semibold tracking-[-0.055em]'>
+          Una buena web empieza con <span class='text-primary-ink'>una conversación.</span>
+        </h2>
+      </div>
+      <p class='max-w-sm text-base leading-relaxed text-muted md:pb-1'>
+        Tú conoces tu negocio. Yo te ayudo a llevarlo a la web. Cuéntame tu idea y vemos cómo hacerla realidad.
+      </p>
+    </div>
+
+    <div class='grid overflow-hidden rounded-[1.75rem] border border-stroke bg-layer shadow-[0_24px_80px_-50px_rgb(36_37_33/0.22)] lg:grid-cols-[0.8fr_1.2fr]'>
+      <div class='relative order-3 flex flex-col overflow-hidden bg-[#173b3c] p-7 text-white sm:p-10 lg:order-none lg:col-start-1 lg:row-start-1 lg:p-11 lg:pb-0'>
+        <div class='pointer-events-none absolute -right-28 -bottom-40 size-96 rounded-full border border-white/10' aria-hidden='true'></div>
+        <p class='mb-5 flex items-center gap-2 text-xs font-medium tracking-[0.12em] text-white/70 uppercase'>
+          <span class='size-1.5 rounded-full bg-primary' aria-hidden='true'></span> Trato directo conmigo
+        </p>
+        <h3 class='max-w-xs text-3xl leading-tight font-semibold tracking-[-0.035em]'>Hablemos de tu idea.</h3>
+        <p class='mt-3 max-w-xs text-sm leading-relaxed text-white/75'>Sin compromiso. No necesitas tener todo resuelto para empezar.</p>
+        <a href={whatsappUrl} target='_blank' rel='noopener noreferrer' class='button button-primary mt-5 justify-between px-5'>
+          <span class='flex items-center gap-3'>
+            <IconWhatsapp class='size-5 shrink-0' /> Hablemos por WhatsApp
+          </span>
+          <IconArrow class='size-5 shrink-0' />
+        </a>
+        <a
+          href={`mailto:${site.email}`}
+          class='mt-5 flex min-h-14 items-center gap-3 border-b border-white/20 pb-5 text-sm transition-colors hover:text-primary'
+        >
+          <IconMail class='size-5 shrink-0' />
+          <span class='min-w-0 break-all'>{site.email}</span>
+          <IconArrow class='ml-auto size-4 shrink-0' />
+        </a>
+        <p class='mt-4 text-sm text-white/60'>{site.phone}</p>
+      </div>
+      <div class='order-1 min-w-0 overflow-hidden bg-[#173b3c] px-7 py-8 sm:px-10 lg:order-none lg:col-start-1 lg:row-start-2 lg:px-11 lg:pt-7 lg:pb-10'>
+        <InquiryScene />
+      </div>
+      <div class='order-2 min-w-0 p-7 sm:p-10 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:p-11'>
+        <p class='mb-3 text-xs font-semibold tracking-[0.12em] text-primary-ink uppercase'>Cuéntame de tu proyecto</p>
+        <h3 class='text-2xl leading-tight font-semibold tracking-[-0.035em] sm:text-3xl'>¿Qué tienes en mente?</h3>
+        <p class='mt-3 text-sm leading-relaxed text-muted'>Completa lo esencial y preparo contigo el siguiente paso.</p>
+        <form id='quote-form' class='mt-8 grid gap-x-5 gap-y-6 sm:grid-cols-2' data-phone={site.whatsapp} data-email={site.email}>
+          <div>
+            <label for='name' class='mb-2 block text-sm font-medium'>
+              Tu nombre
+            </label>
+            <input id='name' name='name' autocomplete='given-name' required minlength='2' maxlength='80' placeholder='Tu nombre' />
+          </div>
+          <div>
+            <label for='business' class='mb-2 block text-sm font-medium'>
+              Tu negocio o proyecto
+            </label>
+            <input
+              id='business'
+              name='business'
+              autocomplete='organization'
+              required
+              minlength='2'
+              maxlength='120'
+              placeholder='Nombre y a qué te dedicas'
+            />
+          </div>
+          <div class='sm:col-span-2'>
+            <label for='service' class='mb-2 block text-sm font-medium'>
+              ¿En qué puedo ayudarte?
+            </label>
+            <select id='service' name='service'>
+              <option>Una landing page</option>
+              <option>Un sitio para mi negocio</option>
+              <option>Mejorar mi página actual</option>
+              <option>Necesito orientación</option>
+            </select>
+          </div>
+          <div class='sm:col-span-2'>
+            <label for='message' class='mb-2 block text-sm font-medium'>
+              Cuéntame un poco más <span class='font-normal text-muted'>(opcional)</span>
+            </label>
+            <textarea
+              id='message'
+              name='message'
+              rows='3'
+              maxlength='600'
+              placeholder='Qué ofreces, dónde atiendes o qué te gustaría lograr…'
+            ></textarea>
+          </div>
+
+          <button type='submit' class='button button-dark w-full justify-between sm:col-span-2'>
+            Preparar mi consulta
+            <IconArrow class='size-5' />
+          </button>
+          <p class='text-xs leading-relaxed text-muted sm:col-span-2'>
+            Podrás revisar tu mensaje antes de enviarlo por WhatsApp o correo. Consulta cómo se usa tu información en
+            <a href='/privacidad/' class='underline underline-offset-3'>
+              Privacidad y contacto
+            </a>
+            .
+          </p>
+          <noscript>
+            <p class='text-sm'>
+              Para cotizar,{' '}
+              <a href={whatsappUrl} class='underline'>
+                escríbeme directamente por WhatsApp
+              </a>{' '}
+              o al correo de esta sección.
+            </p>
+          </noscript>
+        </form>
+        <div
+          id='quote-preview'
+          hidden
+          class='mt-6 rounded-2xl border border-stroke bg-white p-5'
+          role='region'
+          aria-labelledby='preview-title'
+          tabindex='-1'
+        >
+          <h4 id='preview-title' class='font-semibold'>
+            Tu mensaje está listo para revisar
+          </h4>
+          <p class='mt-2 text-sm text-muted'>Todavía no se ha enviado. Elige dónde continuar:</p>
+          <p id='prepared-message' class='mt-4 whitespace-pre-wrap wrap-break-word text-sm leading-relaxed text-muted'></p>
+          <a id='send-whatsapp' target='_blank' rel='noopener noreferrer' class='button button-dark mt-5 w-full' href={whatsappUrl}>
+            Continuar en WhatsApp <IconWhatsapp class='size-5' />
+          </a>
+          <a
+            id='send-email'
+            href={`mailto:${site.email}`}
+            class='mt-4 flex min-h-11 items-center justify-center gap-2 text-sm font-semibold underline underline-offset-4'
+          >
+            Abrir mi aplicación de correo <IconMail class='size-4' />
+          </a>
+          <p class='mt-3 text-xs text-muted'>Si no se abre tu aplicación, puedes copiar el mensaje y escribir a {site.email}.</p>
+        </div>
+        <p id='form-status' class='mt-3 text-sm text-muted' role='status' aria-live='polite'></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import { createInquiry } from '~/lib/inquiry'
+  import { setupInquiryScene } from '~/lib/inquiry-scene'
+  const form = document.querySelector<HTMLFormElement>('#quote-form')
+  const preview = document.querySelector<HTMLElement>('#quote-preview')
+  const status = document.querySelector<HTMLElement>('#form-status')
+  const scene = form ? setupInquiryScene(form) : undefined
+  document.addEventListener('astro:before-swap', () => scene?.dispose(), { once: true })
+  form?.addEventListener('input', () => {
+    if (preview) preview.hidden = true
+    if (status) status.textContent = ''
+  })
+  form?.addEventListener('submit', event => {
+    event.preventDefault()
+    if (!form.reportValidity()) return
+    const data = new FormData(form)
+    const inquiry = createInquiry(
+      {
+        name: String(data.get('name') || ''),
+        business: String(data.get('business') || ''),
+        service: String(data.get('service') || ''),
+        message: String(data.get('message') || ''),
+      },
+      form.dataset.phone || '',
+      form.dataset.email || '',
+    )
+    if (!inquiry) {
+      if (status) status.textContent = 'Escribe tu nombre y tu negocio para preparar la consulta.'
+      return
+    }
+    const text = document.querySelector('#prepared-message')
+    const whatsapp = document.querySelector<HTMLAnchorElement>('#send-whatsapp')
+    const email = document.querySelector<HTMLAnchorElement>('#send-email')
+    if (text) text.textContent = inquiry.message
+    if (whatsapp) whatsapp.href = inquiry.whatsappUrl
+    if (email) email.href = inquiry.emailUrl
+    if (preview) {
+      preview.hidden = false
+      scene?.prepare()
+      preview.focus()
+    }
+    if (status) status.textContent = 'Consulta preparada. Falta enviarla desde WhatsApp o tu correo.'
+  })
+</script>
