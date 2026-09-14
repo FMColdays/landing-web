@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 96 112"
+  fill="none"
+  aria-hidden="true"
+>
+  <path d="M8 8L14 79L31 63L47 91L64 81L48 55L73 51L8 8Z" fill="var(--color-primary)" transform="translate(5 5)"/>
+  <path d="M8 8L14 79L31 63L47 91L64 81L48 55L73 51L8 8Z"
+    fill="var(--color-layer)"
+    stroke="var(--color-ink)"
+    stroke-width="3"
+    stroke-linejoin="round"/>
+  <path d="M19 27L23 53" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round"/>
+</svg>
