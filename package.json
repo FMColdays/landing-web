@@ -2,6 +2,10 @@
   "name": "punto-estudio-web",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@10.6.3",
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
+  },
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",

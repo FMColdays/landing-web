@@ -5,17 +5,17 @@ Proyecto de Erick para ofrecer diseño de páginas web en Tuxtla Gutiérrez, Chi
 ## Desarrollo
 
 ```sh
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Revisar y generar el sitio
 
 ```sh
-npm run check
-npm run build
-npm run check:launch
-npm run preview
+pnpm check
+pnpm build
+pnpm check:launch
+pnpm preview
 ```
 
 Astro genera HTML estático en `dist/`. Tailwind CSS se compila con su integración oficial de Vite. Las fuentes son locales; la imagen original se convierte a WebP con tamaños adaptables. No necesita React ni un servidor para atender formularios.
@@ -48,4 +48,6 @@ La indexación y las posiciones dependen de Google; no existe garantía de apare
 
 ## Publicación
 
-La identidad del proyecto de Sites está en `.openai/hosting.json`. El sitio también se puede desplegar como estático en un alojamiento compatible con Astro. Antes de publicar comprobar `npm run check:launch`. Para una revisión privada cambiar `publicLaunch` a `false`; para un lanzamiento público debe estar en `true` y el alojamiento debe permitir acceso público.
+La identidad del proyecto de Sites está en `.openai/hosting.json`. El sitio también se puede desplegar como estático en un alojamiento compatible con Astro. Antes de publicar comprobar `pnpm check:launch`. Para una revisión privada cambiar `publicLaunch` a `false`; para un lanzamiento público debe estar en `true` y el alojamiento debe permitir acceso público.
+
+El proyecto usa pnpm 10.6.3, fijado en `packageManager`. Conserva `pnpm-lock.yaml` en el repositorio. En despliegues usa `pnpm install --frozen-lockfile` para reproducir las versiones instaladas.
