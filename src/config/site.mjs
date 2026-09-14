@@ -1,7 +1,7 @@
 export const site = {
   name: 'Erick / Web',
   person: 'Erick',
-  url: 'https://erick-web-tuxtla.gpt4mejora.chatgpt.site',
+  url: 'https://web.fmcoldays.dev',
   email: 'erickgp51@gmail.com',
   phone: '+52 961 116 9037',
   whatsapp: '529611169037',
@@ -9,5 +9,5 @@ export const site = {
   region: 'Chiapas',
   country: 'MX',
   publicLaunch: true,
-};
-export const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Hola Erick, me interesa una página web para mi negocio. ¿Podemos platicar?')}`;
+}
+export const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Hola Erick, me interesa una página web para mi negocio. ¿Podemos platicar?')}`

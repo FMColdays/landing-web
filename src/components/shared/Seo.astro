@@ -1,0 +1,73 @@
+---
+import { appConfig, getSeoSchema, ogLocale } from '@config/app-config'
+
+interface Props {
+  title: string
+  description: string
+  keywords?: string[]
+  ogTitle: string
+  ogDescription: string
+  ogImage: string
+  ogUrl: string
+  canonical: string
+  isHome?: boolean
+  schemaType?: 'service' | 'software'
+  noindex?: boolean
+}
+
+const {
+  title,
+  description,
+  keywords = [],
+  ogTitle,
+  ogDescription,
+  ogImage,
+  ogUrl,
+  canonical,
+  noindex = false,
+  isHome = false,
+  schemaType,
+} = Astro.props
+
+const seoSchema = getSeoSchema(title, description, canonical, isHome, schemaType)
+const ogImageUrl = new URL(ogImage, appConfig.metadata.siteUrl).href
+---
+
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<meta name='generator' content={Astro.generator} />
+
+<title>{`${title} | ${appConfig.metadata.siteName}`}</title>
+<meta name='description' content={description} />
+{keywords.length > 0 && <meta name='keywords' content={keywords.join(', ')} />}
+<meta name='author' content={appConfig.metadata.author} />
+<meta
+  name='robots'
+  content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+/>
+<link rel='canonical' href={canonical} />
+
+<meta name='geo.region' content='MX-CHP' />
+<meta name='geo.placename' content='Tuxtla Gutiérrez, Chiapas' />
+<meta name='geo.position' content='16.7657723;-93.1906099' />
+<meta name='ICBM' content='16.7657723, -93.1906099' />
+
+<meta property='og:type' content={appConfig.metadata.ogType} />
+<meta property='og:site_name' content={appConfig.metadata.siteName} />
+<meta property='og:locale' content={ogLocale} />
+<meta property='og:title' content={ogTitle} />
+<meta property='og:description' content={ogDescription} />
+<meta property='og:image' content={ogImageUrl} />
+<meta property='og:url' content={ogUrl} />
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='630' />
+<meta property='og:image:alt' content={ogTitle} />
+<meta property='og:image:type' content='image/webp' />
+
+<meta name='twitter:card' content='summary_large_image' />
+{appConfig.metadata.twitter && <meta name='twitter:site' content={appConfig.metadata.twitter} />}
+<meta name='twitter:title' content={ogTitle} />
+<meta name='twitter:description' content={ogDescription} />
+<meta name='twitter:image' content={ogImageUrl} />
+
+<script is:inline type='application/ld+json' set:html={JSON.stringify(seoSchema).replace(/</g, '\u003c')}></script>
