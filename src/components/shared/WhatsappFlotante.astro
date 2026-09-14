@@ -1,32 +1,107 @@
 ---
+import IconClose from '@icons/IconClose.svg'
+import IconSend from '@icons/IconSend.svg'
 import IconWhatsapp from '@icons/IconWhatsapp.svg'
 import { whatsappUrl } from '@config/site.mjs'
 ---
 
-<a
-  href={whatsappUrl}
-  target='_blank'
-  rel='noopener noreferrer'
+<div
+  class='invisible fixed right-5 bottom-5 z-50 flex translate-y-4 flex-col items-end gap-3 opacity-0 transition-[opacity,transform,visibility] duration-300 ease-out data-[visible]:visible data-[visible]:translate-y-0 data-[visible]:opacity-100 sm:right-8 sm:bottom-8'
   data-wa-flotante
-  aria-label='Escríbeme por WhatsApp'
-  class='invisible fixed right-5 bottom-5 z-50 flex size-14 translate-y-4 items-center justify-center rounded-full bg-whatsapp text-white opacity-0 shadow-[0_10px_28px_-6px_rgb(37_211_102/0.55)] ring-4 ring-paper transition-[opacity,transform,visibility,background-color] duration-300 ease-out hover:bg-whatsapp-hover active:scale-95 data-[visible]:visible data-[visible]:translate-y-0 data-[visible]:opacity-100 sm:right-8 sm:bottom-8'
 >
-  <IconWhatsapp class='size-8' />
-</a>
+  <div
+    class='w-72 origin-bottom-right scale-95 overflow-hidden rounded-2xl opacity-0 shadow-[0_18px_44px_-12px_rgb(36_37_33/0.32)] transition-[opacity,transform] duration-200 ease-out data-[abierto]:scale-100 data-[abierto]:opacity-100'
+    data-wa-panel
+    role='dialog'
+    aria-label='Escríbeme por WhatsApp'
+    hidden
+  >
+    <div class='flex items-center gap-3 bg-whatsapp px-4 py-3 text-white'>
+      <IconWhatsapp class='size-6 shrink-0' />
+      <p class='flex-1 font-display text-base font-bold'>WhatsApp</p>
+      <button
+        type='button'
+        class='flex size-7 shrink-0 items-center justify-center rounded-full bg-white/20 transition-colors duration-200 hover:bg-white/35 active:scale-95'
+        data-wa-cerrar
+        aria-label='Cerrar'
+      >
+        <IconClose class='size-4' />
+      </button>
+    </div>
+
+    <div class='bg-layer-2 px-4 pt-5 pb-4'>
+      <div class='relative w-fit rounded-xl rounded-bl-sm bg-layer px-4 py-3 text-sm leading-relaxed shadow-sm'>
+        <p>
+          Hola <span aria-hidden='true'>👋</span>
+        </p>
+        <p class='text-muted'>¿Necesitas una página web?</p>
+      </div>
+      <a
+        href={whatsappUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+        class='mt-5 flex min-h-12 items-center justify-center gap-3 rounded-full bg-whatsapp px-5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-whatsapp-hover active:scale-95'
+      >
+        Abrir chat <IconSend class='size-5 shrink-0' />
+      </a>
+    </div>
+  </div>
+
+  <button
+    type='button'
+    class='flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_10px_28px_-6px_rgb(37_211_102/0.55)] ring-4 ring-paper transition-[background-color,transform] duration-200 hover:bg-whatsapp-hover active:scale-95'
+    data-wa-abrir
+    aria-expanded='false'
+    aria-label='Abrir el panel de WhatsApp'
+  >
+    <IconWhatsapp class='size-8' />
+  </button>
+</div>
 
 <script>
-  const boton = document.querySelector<HTMLAnchorElement>('[data-wa-flotante]')
+  const caja = document.querySelector<HTMLElement>('[data-wa-flotante]')
+  const panel = document.querySelector<HTMLElement>('[data-wa-panel]')
+  const abrir = document.querySelector<HTMLButtonElement>('[data-wa-abrir]')
+  const cerrar = document.querySelector<HTMLButtonElement>('[data-wa-cerrar]')
   const hero = document.querySelector('[data-hero]')
   const contacto = document.querySelector('#contacto')
 
-  if (boton && hero) {
+  if (caja && panel && abrir && cerrar && hero) {
     let pasoElHero = false
     let contactoVisible = false
 
     const pintar = () => {
-      if (pasoElHero && !contactoVisible) boton.setAttribute('data-visible', '')
-      else boton.removeAttribute('data-visible')
+      if (pasoElHero && !contactoVisible) caja.setAttribute('data-visible', '')
+      else {
+        caja.removeAttribute('data-visible')
+        alternar(false)
+      }
     }
+
+    const alternar = (mostrar: boolean) => {
+      abrir.setAttribute('aria-expanded', String(mostrar))
+      if (mostrar) {
+        panel.hidden = false
+        requestAnimationFrame(() => panel.setAttribute('data-abierto', ''))
+      } else {
+        panel.removeAttribute('data-abierto')
+        panel.addEventListener('transitionend', () => (panel.hidden = !panel.hasAttribute('data-abierto')), {
+          once: true,
+        })
+      }
+    }
+
+    abrir.addEventListener('click', () => alternar(!panel.hasAttribute('data-abierto')))
+    cerrar.addEventListener('click', () => {
+      alternar(false)
+      abrir.focus()
+    })
+    document.addEventListener('keydown', evento => {
+      if (evento.key === 'Escape' && panel.hasAttribute('data-abierto')) {
+        alternar(false)
+        abrir.focus()
+      }
+    })
 
     new IntersectionObserver(
       ([entrada]) => {
