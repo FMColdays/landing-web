@@ -305,7 +305,6 @@
         const routeNodes = gsap.utils.toArray<SVGGElement>('[data-route-node]')
         steps.forEach(step => {
           gsap.from(step, {
-            opacity: 0.4,
             x: desktop ? 24 : 0,
             y: 16,
             ease: 'none',
