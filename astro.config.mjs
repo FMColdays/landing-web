@@ -5,6 +5,9 @@ import { site } from './src/config/site.mjs'
 
 export default defineConfig({
   site: site.url,
+  build: {
+    inlineStylesheets: 'always',
+  },
   output: 'static',
   integrations: [sitemap({ filter: page => !page.endsWith('/404/') })],
   vite: { plugins: [tailwindcss()] },
