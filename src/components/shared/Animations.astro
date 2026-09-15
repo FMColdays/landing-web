@@ -348,10 +348,11 @@
           splits.push(
             SplitText.create(paragraph, {
               type: 'words',
+              aria: 'none',
               onSplit: split =>
                 gsap.fromTo(
                   split.words,
-                  { color: '#999c92' },
+                  { color: '#62645b' },
                   {
                     color: '#242521',
                     stagger: 0.06,
