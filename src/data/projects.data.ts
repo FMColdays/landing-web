@@ -7,6 +7,7 @@ import type { Projects } from '@/interfaces'
 export const PROJECTS: Projects[] = [
   {
     nombre: 'Flotal',
+    url: 'https://www.flotal.ai',
     giro: 'Control de llantas y sensores TPMS',
     imagen: flotal,
     alt: 'Diseño del sitio de Flotal, con su portada y secciones de soluciones para flotillas.',
@@ -15,6 +16,7 @@ export const PROJECTS: Projects[] = [
   },
   {
     nombre: 'Fuel Software Control',
+    url: 'https://www.fuelsoftwarecontrol.ai',
     giro: 'Control de combustible para flotas',
     imagen: fuel,
     alt: 'Diseño del sitio de Fuel Software Control, con su portada en tonos violeta y sus soluciones de combustible.',
@@ -23,6 +25,7 @@ export const PROJECTS: Projects[] = [
   },
   {
     nombre: 'Desarrolladora Clave',
+    url: 'https://clave.com.mx',
     giro: 'Desarrollo de vivienda e infraestructura en México',
     imagen: clave,
     alt: 'Diseño del sitio de Desarrolladora Clave, con su portada de vivienda, cifras y presentación de la empresa.',
@@ -31,6 +34,7 @@ export const PROJECTS: Projects[] = [
   },
   {
     nombre: 'Gasolinera Montajes',
+    url: 'https://www.gpomontajes.com',
     giro: 'Estación de servicio en Tuxtla Gutiérrez',
     imagen: montajes,
     alt: 'Diseño del sitio de Gasolinera Montajes, con su portada fotográfica y sus servicios.',

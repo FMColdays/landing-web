@@ -7,4 +7,5 @@ export interface Projects {
   alt: string
   categoria: string
   enfoque: string
+  url: string
 }

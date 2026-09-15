@@ -1,3 +1,4 @@
+import { PROJECTS } from '@data/projects.data'
 export const SITE_URL = 'https://www.fmcoldays.dev'
 
 export const htmlLang = 'es-MX'
@@ -59,6 +60,7 @@ export function getSeoSchema(title: string, description: string, canonical: stri
       addressCountry: 'MX',
     },
     sameAs: [],
+    founder: { '@id': `${SITE_URL}/#persona` },
     areaServed,
     knowsLanguage: ['es-MX'],
     hasOfferCatalog: {
@@ -114,6 +116,43 @@ export function getSeoSchema(title: string, description: string, canonical: stri
     }
   }
 
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE_URL}/#persona`,
+    name: 'Erick González Pérez',
+    alternateName: 'Erick Web',
+    jobTitle: 'Diseñador y desarrollador web',
+    description:
+      'Diseñador y desarrollador web independiente en Tuxtla Gutiérrez, Chiapas. Crea páginas web y landing pages para negocios de todo México.',
+    url: SITE_URL,
+    email: 'erickgp51@gmail.com',
+    telephone: '+52-961-116-9037',
+    worksFor: { '@id': `${SITE_URL}/#business` },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Tuxtla Gutiérrez',
+      addressRegion: 'Chiapas',
+      addressCountry: 'MX',
+    },
+    knowsAbout: ['Diseño de páginas web', 'Landing pages', 'Desarrollo web', 'SEO', 'Astro', 'Tailwind CSS'],
+    knowsLanguage: ['es-MX'],
+    sameAs: ['https://github.com/FMColdays'],
+  }
+
+  const worksSchema = isHome
+    ? PROJECTS.map(project => ({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${project.url}/#website`,
+        url: project.url,
+        name: project.nombre,
+        description: project.enfoque,
+        inLanguage: htmlLang,
+        creator: { '@id': `${SITE_URL}/#persona` },
+      }))
+    : []
+
   const webSiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -122,6 +161,7 @@ export function getSeoSchema(title: string, description: string, canonical: stri
     name: 'Erick Web',
     inLanguage: htmlLang,
     publisher: { '@id': `${SITE_URL}/#business` },
+    creator: { '@id': `${SITE_URL}/#persona` },
   }
 
   const webPageSchema = {
@@ -151,7 +191,7 @@ export function getSeoSchema(title: string, description: string, canonical: stri
 
   return {
     '@context': 'https://schema.org',
-    '@graph': [businessSchema, webSiteSchema, webPageSchema, serviceSchema, breadcrumbSchema].filter(Boolean),
+    '@graph': [businessSchema, personSchema, webSiteSchema, webPageSchema, serviceSchema, breadcrumbSchema, ...worksSchema].filter(Boolean),
   }
 }
 
