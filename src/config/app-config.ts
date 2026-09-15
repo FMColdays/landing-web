@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://web.fmcoldays.dev'
+export const SITE_URL = 'https://www.fmcoldays.dev'
 
 export const htmlLang = 'es-MX'
 export const ogLocale = 'es_MX'

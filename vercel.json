@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/en", "destination": "https://dev.fmcoldays.dev/en/", "permanent": true },
+    { "source": "/en/:path*", "destination": "https://dev.fmcoldays.dev/en/:path*", "permanent": true },
+    { "source": "/CV_Erick_Gonzalez_Perez_ES.pdf", "destination": "https://dev.fmcoldays.dev/CV_Erick_Gonzalez_Perez_ES.pdf", "permanent": true },
+    { "source": "/articulo-trastornos-mentales-universitarios.pdf", "destination": "https://dev.fmcoldays.dev/articulo-trastornos-mentales-universitarios.pdf", "permanent": true }
+  ]
+}
