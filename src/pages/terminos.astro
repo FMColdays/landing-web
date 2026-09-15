@@ -1,0 +1,148 @@
+---
+import Layout from '@layouts/Layout.astro'
+import IconArrow from '@icons/IconArrow.svg'
+import { site } from '@config/site.mjs'
+
+const actualizado = '15 de septiembre de 2026'
+
+const secciones = [
+  {
+    titulo: 'Quién presta el servicio',
+    parrafos: [
+      `${site.fullName} ofrece servicios de diseño y desarrollo de páginas web como persona física independiente, desde ${site.city}, ${site.region}, para negocios de toda la República Mexicana. El contacto para cualquier asunto relacionado con estos términos es ${site.email}.`,
+    ],
+  },
+  {
+    titulo: 'Cómo se contrata un proyecto',
+    parrafos: [
+      'Toda consulta inicia una conversación sin costo y sin compromiso. A partir de ella se prepara una cotización por escrito que detalla el alcance, los tiempos estimados y el costo del proyecto.',
+      'Ningún trabajo comienza sin que esa cotización haya sido aprobada por ti. La cotización aprobada define el contenido exacto del proyecto: si algo no está en ella, no forma parte del alcance acordado.',
+    ],
+  },
+  {
+    titulo: 'Lo que necesitas aportar',
+    parrafos: [
+      'Para trabajar necesito conocer tu negocio, tus servicios y a quién quieres llegar. Si ya cuentas con logotipo, fotografías o textos, se aprovechan; si no, te acompaño a definir qué contenido hace falta.',
+      'Eres responsable de que el material que entregues sea tuyo o de que cuentes con permiso para usarlo. Eso incluye textos, fotografías, logotipos y cualquier contenido de terceros.',
+    ],
+  },
+  {
+    titulo: 'Propiedad y accesos',
+    parrafos: [
+      'El dominio y las cuentas del negocio quedan a tu nombre. Al terminar el proyecto recibes tus accesos y una explicación de cómo funciona tu sitio.',
+      'La entrega del sitio, del código y de las licencias utilizadas se detalla desde el inicio del proyecto, en la misma cotización.',
+    ],
+  },
+  {
+    titulo: 'Dominio, alojamiento y servicios de terceros',
+    parrafos: [
+      'El dominio, el alojamiento y cualquier servicio de terceros que requiera tu sitio se especifican en la cotización, junto con quién los contrata y quién los paga.',
+      'Esos servicios se rigen por las condiciones de cada proveedor. No respondo por interrupciones, cambios de precio o cierres de servicio ajenos.',
+    ],
+  },
+  {
+    titulo: 'Sobre buscadores y resultados',
+    destacado: true,
+    parrafos: [
+      'Preparo tu sitio para que Google pueda descubrirlo y entenderlo: estructura, contenido, velocidad y sitemap. Eso es trabajo técnico verificable y forma parte de lo que entrego.',
+      'Aparecer en buscadores y ganar posiciones lleva tiempo y depende de la competencia de tu sector, de tu contenido y de factores que ningún proveedor controla. No garantizo posiciones, cantidad de visitas, contactos ni ventas, y desconfía de quien te lo garantice.',
+    ],
+  },
+  {
+    titulo: 'Después de publicar tu sitio',
+    parrafos: [
+      'Con la entrega de accesos concluye el proyecto acordado. Si quieres acompañamiento posterior, mantenimiento o mejoras, se acuerdan por separado como un nuevo trabajo.',
+    ],
+  },
+  {
+    titulo: 'Pagos',
+    parrafos: [
+      'Los precios se cotizan en pesos mexicanos (MXN). Se aceptan transferencia bancaria y efectivo. El monto, las parcialidades y las fechas de pago se establecen en cada cotización.',
+    ],
+  },
+  {
+    titulo: 'Confidencialidad',
+    parrafos: [
+      'La información de tu negocio que compartas para el proyecto se trata de forma confidencial y se usa únicamente para realizarlo. El manejo de los datos de tus consultas se describe en la página de privacidad.',
+    ],
+  },
+  {
+    titulo: 'Portafolio',
+    parrafos: [
+      'Salvo que me indiques lo contrario por escrito, puedo mostrar el trabajo terminado en mi portafolio y mencionar el nombre de tu negocio. Si prefieres que no aparezca, basta con decírmelo.',
+    ],
+  },
+  {
+    titulo: 'Cambios a estos términos',
+    parrafos: [
+      'Estos términos pueden actualizarse. La versión vigente es siempre la publicada en esta página, con la fecha de actualización indicada arriba. Las condiciones de un proyecto ya cotizado y aprobado no cambian por una actualización posterior.',
+    ],
+  },
+  {
+    titulo: 'Legislación aplicable',
+    parrafos: [
+      'Estos términos se rigen por la legislación mexicana. Para cualquier controversia son competentes los tribunales de Tuxtla Gutiérrez, Chiapas, sin perjuicio de los derechos que la Ley Federal de Protección al Consumidor te reconoce.',
+    ],
+  },
+]
+---
+
+<Layout
+  title='Términos y condiciones'
+  description='Condiciones del servicio de diseño y desarrollo de páginas web de Erick González Pérez, en Tuxtla Gutiérrez, Chiapas, para negocios de todo México.'
+>
+  <main id='contenido' class='mx-auto w-full max-w-3xl px-6 py-16 sm:px-10 md:py-24'>
+    <a
+      href='/'
+      class='group inline-flex min-h-11 items-center gap-2 text-sm font-medium underline decoration-stroke underline-offset-6 transition-colors duration-200 hover:decoration-primary'
+    >
+      <IconArrow class='size-4 rotate-180 transition-transform duration-200 group-hover:-translate-x-1' />
+      Volver a {site.name}
+    </a>
+
+    <div class='mt-12 mb-5 inline-flex items-center gap-3'>
+      <span class='block h-px w-6 bg-primary/50'></span>
+      <span class='text-xs font-medium tracking-[0.14em] text-primary-ink uppercase'>Condiciones del servicio</span>
+    </div>
+    <h1 class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em]'>Términos y condiciones</h1>
+    <p class='mt-5 text-base leading-relaxed text-muted'>
+      Estas condiciones describen cómo trabajo y qué puedes esperar de un proyecto. Son un marco general: lo específico de tu proyecto
+      siempre queda por escrito en su cotización.
+    </p>
+    <p class='mt-3 text-sm text-dim'>Última actualización: {actualizado}</p>
+
+    <div class='mt-14 divide-y divide-stroke border-t border-stroke'>
+      {secciones.map(({ titulo, parrafos, destacado }) => (
+        <section class='relative py-9'>
+          {destacado && (
+            <span class='absolute -top-[3.5px] left-0 size-[7px] rounded-full bg-primary ring-4 ring-paper' aria-hidden='true' />
+          )}
+          <h2 class='font-display text-xl font-semibold tracking-[-0.03em]'>{titulo}</h2>
+          <div class='mt-4 space-y-4 text-base leading-relaxed text-muted'>
+            {parrafos.map(texto => (
+              <p>{texto}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p class='mt-10 border-t border-stroke pt-8 text-base leading-relaxed text-muted'>
+      ¿Alguna duda sobre estas condiciones? Escríbeme a{' '}
+      <a
+        class='text-ink underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:decoration-primary'
+        href={`mailto:${site.email}`}
+      >
+        {site.email}
+      </a>{' '}
+      o consulta la{' '}
+      <a
+        class='text-ink underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:decoration-primary'
+        href='/privacidad/'
+      >
+        página de privacidad
+      </a>
+      .
+    </p>
+  </main>
+</Layout>

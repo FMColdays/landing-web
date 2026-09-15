@@ -20,7 +20,7 @@ const anio = new Date().getFullYear()
     <div class='grid gap-12 py-14 md:grid-cols-[1.25fr_0.85fr_1fr] md:gap-10 lg:gap-16 lg:py-20'>
       <div data-anim='bloque'>
         <a href='/' class='font-display text-2xl font-extrabold tracking-[-0.07em]' aria-label={`${site.name}, inicio`}>
-          erick<span class='mx-1 text-primary'>/</span>web<span class='text-primary'>.</span>
+          erick<span class='mx-1 text-primary-ink'>/</span>web<span class='text-primary-ink'>.</span>
         </a>
         <p class='mt-5 max-w-xs text-sm leading-relaxed text-muted'>
           Páginas web y landing pages hechas desde cero para negocios de todo México.
@@ -98,6 +98,12 @@ const anio = new Date().getFullYear()
       <p>
         © {anio} {site.fullName} · {site.name}
       </p>
+      <a
+        href='/terminos/'
+        class='min-h-9 underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-primary active:text-ink'
+      >
+        Términos y condiciones
+      </a>
       <a
         href='/privacidad/'
         class='min-h-9 underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-primary active:text-ink'
