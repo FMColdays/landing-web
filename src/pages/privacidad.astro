@@ -1,46 +1,133 @@
 ---
 import Layout from '@layouts/Layout.astro'
+import IconArrow from '@icons/IconArrow.svg'
 import { site } from '@config/site.mjs'
+
+const actualizado = '15 de septiembre de 2026'
+
+const secciones = [
+  {
+    titulo: 'Quién es responsable de tus datos',
+    parrafos: [
+      `${site.fullName} es el responsable del tratamiento de los datos personales que compartes a través de este sitio. Opera como persona física independiente desde ${site.city}, ${site.region}, México.`,
+      `Para cualquier asunto relacionado con tus datos, el canal de contacto es ${site.email}.`,
+    ],
+  },
+  {
+    titulo: 'Qué pasa cuando llenas el formulario',
+    destacado: true,
+    parrafos: [
+      'El formulario de este sitio no envía nada a ningún servidor. Funciona dentro de tu navegador: toma lo que escribes —tu nombre, tu negocio, el servicio que te interesa y los detalles que decidas incluir— y con eso arma un mensaje que puedes revisar antes de mandarlo.',
+      'Tú decides si lo envías por WhatsApp o desde tu aplicación de correo. Si cierras la página sin enviarlo, esa información no queda registrada en ningún lado.',
+    ],
+  },
+  {
+    titulo: 'Qué datos recibo y para qué',
+    parrafos: [
+      'Cuando decides enviar el mensaje, recibo su contenido y los datos de contacto que muestre el canal que elegiste: tu número en el caso de WhatsApp, o tu dirección en el caso del correo.',
+      'Esa información se usa únicamente para responderte, entender tu proyecto, preparar una cotización y dar seguimiento a esa conversación. No se usa para publicidad ni para ninguna finalidad distinta a la que motivó tu consulta.',
+    ],
+  },
+  {
+    titulo: 'Con quién se comparte',
+    parrafos: [
+      'No vendo, rento ni comparto tus datos con terceros con fines comerciales.',
+      'Los únicos terceros que intervienen son los que tú mismo eliges al enviar el mensaje: WhatsApp y tu proveedor de correo procesan la información conforme a sus propias políticas, sobre las que no tengo control.',
+      'Este sitio está alojado en Vercel, que como cualquier servidor web registra datos técnicos de las visitas —dirección IP, navegador, páginas solicitadas— con fines de operación y seguridad. Ese registro lo genera y conserva Vercel según sus propias condiciones.',
+    ],
+  },
+  {
+    titulo: 'Analítica y rastreo',
+    parrafos: [
+      'Este sitio no instala analítica publicitaria, píxeles de seguimiento ni cookies propias de rastreo. No se construye un perfil tuyo ni se te sigue entre sitios.',
+      'Si esto cambia en el futuro, se indicará en esta página antes de implementarlo.',
+    ],
+  },
+  {
+    titulo: 'Tus derechos sobre tu información',
+    parrafos: [
+      'Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, cancelación y oposición —los llamados derechos ARCO—: saber qué datos tuyos conservo, pedir que los corrija, solicitar que los elimine u oponerte a que los siga usando.',
+      `Para ejercerlos basta con escribir a ${site.email} indicando qué necesitas. Recibirás respuesta al mismo medio por el que me contactaste. También puedes pedir simplemente que no se continúe el contacto, y se respeta de inmediato.`,
+    ],
+  },
+  {
+    titulo: 'Cuánto tiempo conservo tu información',
+    parrafos: [
+      'Las conversaciones de consulta se conservan mientras exista una relación o un interés activo en el proyecto. Si me pides eliminarlas, se eliminan de los medios que estén bajo mi control.',
+      'La información de proyectos ya realizados se conserva el tiempo necesario para atender garantías, aclaraciones y obligaciones legales.',
+    ],
+  },
+  {
+    titulo: 'Datos sensibles',
+    parrafos: [
+      'Para cotizar una página web no hace falta ningún dato sensible. Evita incluir información de salud, financiera, de identificación oficial o de terceros en tu consulta: no la necesito y no debería viajar por estos canales.',
+    ],
+  },
+  {
+    titulo: 'Cambios a este aviso',
+    parrafos: [
+      'Este aviso puede actualizarse cuando cambie la forma en que funciona el sitio o los servicios que utiliza. La versión vigente es siempre la publicada en esta página, con la fecha de actualización indicada arriba.',
+    ],
+  },
+]
 ---
 
 <Layout
-  title='Privacidad y contacto'
-  description='Cómo se utiliza la información de tus consultas de diseño web a Erick en Tuxtla Gutiérrez.'
+  title='Aviso de privacidad'
+  description='Cómo se trata la información de tus consultas de diseño web a Erick González Pérez, en Tuxtla Gutiérrez, Chiapas.'
 >
-  <main id='contenido' class='mx-auto max-w-3xl px-6 py-16 md:py-24'>
-    <a href='/' class='text-sm underline underline-offset-4'>
-      ← Volver a Erick / Web
+  <main id='contenido' class='mx-auto w-full max-w-3xl px-6 py-16 sm:px-10 md:py-24'>
+    <a
+      href='/'
+      class='group inline-flex min-h-11 items-center gap-2 text-sm font-medium underline decoration-stroke underline-offset-6 transition-colors duration-200 hover:decoration-primary'
+    >
+      <IconArrow class='size-4 rotate-180 transition-transform duration-200 group-hover:-translate-x-1' />
+      Volver a {site.name}
     </a>
-    <h1 class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em] mt-12'>Privacidad y contacto</h1>
-    <div class='mt-10 space-y-7 text-base leading-relaxed text-muted'>
-      <p>
-        Erick es la persona de contacto de este servicio independiente de diseño web en Tuxtla Gutiérrez, Chiapas. Para consultas sobre tu
-        información, escribe a{' '}
-        <a class='text-ink underline' href={`mailto:${site.email}`}>
-          {site.email}
-        </a>
-        .
-      </p>
-      <h2 class='text-2xl font-semibold text-ink'>La información de tu consulta</h2>
-      <p>
-        El formulario prepara un mensaje con tu nombre, negocio, servicio de interés y los detalles que decidas incluir. No envía ni guarda
-        estos datos en un servidor de esta página. Puedes revisarlos y decidir si quieres enviarlos por WhatsApp o desde tu aplicación de
-        correo.
-      </p>
-      <p>
-        Cuando envías el mensaje, Erick recibe su contenido y los datos de contacto que muestra el canal elegido. Se utilizan para
-        responder, conocer tu proyecto, preparar una cotización y dar seguimiento a esa conversación.
-      </p>
-      <h2 class='text-2xl font-semibold text-ink'>Servicios externos</h2>
-      <p>
-        WhatsApp y tu proveedor de correo procesan la información según sus propias condiciones y políticas. Este sitio no instala analítica
-        publicitaria ni píxeles de seguimiento propios.
-      </p>
-      <h2 class='text-2xl font-semibold text-ink'>Control de tu información</h2>
-      <p>
-        Puedes pedir información sobre tus datos, su corrección, eliminación o que no se continúe el contacto escribiendo al correo
-        indicado. Evita incluir datos sensibles en tu consulta.
-      </p>
+
+    <div class='mt-12 mb-5 inline-flex items-center gap-3'>
+      <span class='block h-px w-6 bg-primary/50'></span>
+      <span class='text-xs font-medium tracking-[0.14em] text-primary-ink uppercase'>Tus datos</span>
     </div>
+    <h1 class='text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.035em]'>Aviso de privacidad</h1>
+    <p class='mt-5 text-base leading-relaxed text-muted'>
+      Este aviso explica qué información recibo cuando me escribes, para qué la uso y qué puedes hacer con ella. En resumen: solo lo que me
+      mandas, solo para responderte, y solo mientras te sirva.
+    </p>
+    <p class='mt-3 text-sm text-dim'>Última actualización: {actualizado}</p>
+
+    <div class='mt-14 divide-y divide-stroke border-t border-stroke'>
+      {secciones.map(({ titulo, parrafos, destacado }) => (
+        <section class='relative py-9'>
+          {destacado && (
+            <span class='absolute -top-[3.5px] left-0 size-[7px] rounded-full bg-primary ring-4 ring-paper' aria-hidden='true' />
+          )}
+          <h2 class='font-display text-xl font-semibold tracking-[-0.03em]'>{titulo}</h2>
+          <div class='mt-4 space-y-4 text-base leading-relaxed text-muted'>
+            {parrafos.map(texto => (
+              <p>{texto}</p>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p class='mt-10 border-t border-stroke pt-8 text-base leading-relaxed text-muted'>
+      ¿Alguna duda sobre tus datos? Escríbeme a{' '}
+      <a
+        class='text-ink underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:decoration-primary'
+        href={`mailto:${site.email}`}
+      >
+        {site.email}
+      </a>{' '}
+      o consulta los{' '}
+      <a
+        class='text-ink underline decoration-stroke underline-offset-4 transition-colors duration-200 hover:decoration-primary'
+        href='/terminos/'
+      >
+        términos y condiciones
+      </a>
+      .
+    </p>
   </main>
 </Layout>
